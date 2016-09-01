@@ -5,7 +5,7 @@
 	<artifactId>diwali</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>diwali Maven Webapp</name>
+	<name>Diwali Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
