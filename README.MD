@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/varunmehta/gric-diwali.svg?branch=master)](https://travis-ci.org/varunmehta/gric-diwali)
+
 # Glen Rock Indian Community - Diwali Registration
 
 Basic spring-boot app, which persists data to DynamoDB and integrates with Stripe for capturing payment info.
