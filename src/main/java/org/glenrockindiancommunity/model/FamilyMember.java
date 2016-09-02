@@ -7,19 +7,26 @@ public class FamilyMember {
 
 	private String firstName;
 	private String lastName;
+	private String email;
 	private String gender;
 	private Integer age;
+	private Boolean primaryEmail;
+	private Boolean subscribeEmail;
 	private Boolean participant;
 
 	public FamilyMember() {
 		// default constructor
 	}
 
-	public FamilyMember(String firstName, String lastName, String gender, Integer age, Boolean participant) {
+	public FamilyMember(String firstName, String lastName, String email, String gender, Integer age,
+			Boolean primaryEmail, Boolean subscribeEmail, Boolean participant) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		this.gender = gender;
 		this.age = age;
+		this.primaryEmail = primaryEmail;
+		this.subscribeEmail = subscribeEmail;
 		this.participant = participant;
 	}
 
@@ -31,12 +38,24 @@ public class FamilyMember {
 		return lastName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getGender() {
 		return gender;
 	}
 
 	public Integer getAge() {
 		return age;
+	}
+
+	public Boolean getPrimaryEmail() {
+		return primaryEmail;
+	}
+
+	public Boolean getSubscribeEmail() {
+		return subscribeEmail;
 	}
 
 	public Boolean getParticipant() {
@@ -51,12 +70,24 @@ public class FamilyMember {
 		this.lastName = lastName;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	public void setPrimaryEmail(Boolean primaryEmail) {
+		this.primaryEmail = primaryEmail;
+	}
+
+	public void setSubscribeEmail(Boolean subscribeEmail) {
+		this.subscribeEmail = subscribeEmail;
 	}
 
 	public void setParticipant(Boolean participant) {

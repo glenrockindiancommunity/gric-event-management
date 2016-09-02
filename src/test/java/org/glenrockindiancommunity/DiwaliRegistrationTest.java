@@ -12,9 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.ProfileValueSourceConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -40,16 +37,16 @@ public class DiwaliRegistrationTest {
 	FamilyRepository repository;
 
 	@Autowired
-	AmazonDynamoDB amazonDynamoDB;
+	AmazonDynamoDB dynamodb;
 
 	@Before
 	public void init() throws Exception {
 
-		ListTablesResult listTablesResult = amazonDynamoDB.listTables();
+		ListTablesResult listTablesResult = dynamodb.listTables();
 
 		listTablesResult.getTableNames().stream().filter(tableName -> tableName.equals(TABLE_NAME))
 				.forEach(tableName -> {
-					amazonDynamoDB.deleteTable(tableName);
+					dynamodb.deleteTable(tableName);
 				});
 
 		List<AttributeDefinition> attributeDefinitions = new ArrayList<AttributeDefinition>();
@@ -62,7 +59,7 @@ public class DiwaliRegistrationTest {
 				.withAttributeDefinitions(attributeDefinitions).withProvisionedThroughput(new ProvisionedThroughput()
 						.withReadCapacityUnits(READ_CAPACITY_UNITS).withWriteCapacityUnits(WRITE_CAPACITY_UNITS));
 
-		amazonDynamoDB.createTable(request);
+		dynamodb.createTable(request);
 
 	}
 
@@ -86,14 +83,17 @@ public class DiwaliRegistrationTest {
 		String familyNameCode = family.getFamilyNameCode();
 
 		for (int i = 0; i <= 6; i++) {
-			FamilyMember member = new FamilyMember("Firstname" + i, "Lastname" + i, "M", 7 + i, false);
+			FamilyMember member = new FamilyMember("Firstname" + i, "Lastname" + i, "junk@example.com", "M", 7 + i,
+					false, true, true);
 			family.addFamilyMember(member);
 		}
 		repository.save(family);
-		
+
 		Family family2 = repository.findByFamilyNameCode(familyNameCode);
-		
+
 		Assert.assertEquals(family, family2);
+
+		System.out.println(family2.toString());
 	}
 
 }
