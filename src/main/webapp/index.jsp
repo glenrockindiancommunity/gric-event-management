@@ -1,61 +1,209 @@
 <html>
 <head>
 <title>Glen Rock Indian Community - Diwali Registration</title>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js" 
-	integrity="sha256-yUWanhHkxj+3ow0qZE6AtzP8lZkwLvPagULL6PnZMz0=" crossorigin="anonymous"></script>
+<link href="static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="static/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.smartWizard-2.0.min.js"></script>
+<script type="text/javascript">
 
-<script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"   
-	integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8=" crossorigin="anonymous"></script>
+$(document).ready(function(){
+	// Smart Wizard     	
+		$('#wizard').smartWizard({transitionEffect:'slideleft',/* onLeaveStep:leaveAStepCallback,*/onFinish:onFinishCallback,enableFinishButton:true});
 
+/*   function leaveAStepCallback(obj){
+    var step_num= obj.attr('rel');
+    return validateSteps(step_num);
+  }
+ */  
+  function onFinishCallback(){
+   if(validateAllSteps()){
+    $('form').submit();
+   }
+  }
+	});
+</script>
 </head>
 <body>
-  <p>(*) Mandatory</p>
 
-	<form id="diwali-registration" action="#">
-	    <h2>Registration</h2>
-	    <fieldset>
-	        <legend>Family Information</legend>
-	        <label for="userName-2">Last Name *</label>
-	        <input id="userName-2" name="userName" type="text" class="required">
-	        <label for="password-2">Town *</label>
-	        <input id="password-2" name="password" type="text" class="required">
-	        <label for="confirm-2">Adults *</label>
-	        <input id="confirm-2" name="confirm" type="text" class="required">
-	        <label for="confirm-2">Kids *</label>
-	        <input id="confirm-2" name="confirm" type="text" class="required">
-	    </fieldset>
-	 
-	    <h2>Family Members</h2>
-	    <fieldset>
-	        <legend>Profile Information</legend>
-	 
-	        <label for="name-2">First name *</label>
-	        <input id="name-2" name="name" type="text" class="required">
-	        <label for="surname-2">Last name *</label>
-	        <input id="surname-2" name="surname" type="text" class="required">
-	        <label for="email-2">Email *</label>
-	        <input id="email-2" name="email" type="text" class="required email">
-	        <label for="address-2">Gender</label>
-	        <input id="address-2" name="address" type="text">
-	        <label for="age-2">Age</label>
-	        <input id="age-2" name="age" type="text" class="required number">
-	        <input id="participant-2" name="participant" type="checkbox">	        
-	        <label for="participant-2">Participate in cultural program at the party</label>
-	    </fieldset>
-	 
-	    <h3>Payment</h3>
-	    <fieldset>
-	        <legend>Let's use Stripe for payment.</legend>
-	 
-	        <p>Click on the button below to launch the payment gateway</p>
-	    </fieldset>
-	 
-	    <h3>Confirmation</h3>
-	    <fieldset>
-	        <legend>Terms and Conditions</legend>
-	 
-	        <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
-	    </fieldset>
-	</form>
+	<form action="#" method="POST">
+	  <input type='hidden' name="issubmit" value="1">
+	<!-- Tabs -->
+	  		<div id="wizard" class="swMain">
+	  			<ul>
+	  				<li><a href="#step-1">
+	                <span class="stepNumber">1</span>
+	                <span class="stepDesc">
+	                   Basic Info<br />
+	                   <small>Provide basic info</small>
+	                </span>
+	            </a></li>
+	  				<li><a href="#step-2">
+	                <span class="stepNumber">2</span>
+	                <span class="stepDesc">
+	                   Family Details<br />
+	                   <small>Provide family details</small>
+	                </span>
+	            </a></li>
+	  				<li><a href="#step-3">
+	                <span class="stepNumber">3</span>
+	                <span class="stepDesc">
+	                   Payment<br />
+	                   <small>Pay for the event</small>
+	                </span>
+	             </a></li>
+	  				<li><a href="#step-4">
+	                <span class="stepNumber">3</span>
+	                <span class="stepDesc">
+	                   Confirmation<br />
+	                   <small>Get confirmation number</small>
+	                </span>
+	            </a></li>
+	  			</ul>
+	  			<div id="step-1">	
+	            <h2 class="StepTitle">Step 1: Basic Info</h2>
+	            <table cellspacing="3" cellpadding="3" align="center">
+	          			<tr>
+	                    	<td align="center" colspan="3">&nbsp;</td>
+	          			</tr>        
+	          			<tr>
+	                    	<td align="right">Last Name :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="username" name="username" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_username"></span>&nbsp;</td>
+	          			</tr>
+	          			<tr>
+	                    	<td align="right">Town :</td>
+	                    	<td align="left">
+	                    	  <input type="password" id="password" name="password" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_password"></span>&nbsp;</td>
+	          			</tr> 
+	                    <tr>
+	                    	<td align="right">Adults :</td>
+	                    	<td align="left">
+	                    	  <input type="password" id="cpassword" name="cpassword" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_cpassword"></span>&nbsp;</td>
+	          			 </tr>
+	          		     <tr>
+	                    	<td align="right">Kids :</td>
+	                    	<td align="left">
+	                    	  <input type="password" id="cpassword" name="cpassword" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_cpassword"></span>&nbsp;</td>
+	          			</tr>                                   			
+	          			                                   			
+	  			   </table>          			
+	        </div>
+	  			<div id="step-2">
+	            <h2 class="StepTitle">Step 2: Family Details</h2>	
+	            <table cellspacing="3" cellpadding="3" align="center">
+	          			<tr>
+	                    	<td align="center" colspan="3">&nbsp;</td>
+	          			</tr>        
+	          			<tr>
+	                    	<td align="right">First Name :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="firstname" name="firstname" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_firstname"></span>&nbsp;</td>
+	          			</tr>
+	          			<tr>
+	                    	<td align="right">Last Name :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="lastname" name="lastname" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+	          			</tr>
+	          			<tr>
+	                    	<td align="right">Email :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="lastname" name="lastname" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+	          			</tr> 
+	          			 
+	          			<tr>
+	                    	<td align="right">Gender :</td>
+	                    	<td align="left">
+	                        <select id="gender" name="gender" class="txtBox">
+	                          <option value="">-select-</option>
+	                          <option value="Female">Female</option>
+	                          <option value="Male">Male</option>                 
+	                        </select>
+	                      </td>
+	                    	<td align="left"><span id="msg_gender"></span>&nbsp;</td>
+	          			</tr>
+	          			<tr>
+	                    	<td align="right">Age :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="lastname" name="lastname" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+	          			</tr> 
+	          			<tr>
+	                    	<td align="right">Participant :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="lastname" name="lastname" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+	          			</tr> 
+
+	  			   </table>        
+	        </div>                      
+	  			<div id="step-3">
+	            <h2 class="StepTitle">Step 3: Payment Gateway</h2>	
+	            <table cellspacing="3" cellpadding="3" align="center">
+	          			<tr>
+	                    	<td align="center">
+	                    		All payments are final. There are no refunds or  
+							</td>
+	          			</tr>        
+	          			<tr>
+	                    	<td align="center">
+								<form action="/your-charge-code" method="POST">
+								<script
+								  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+								  data-key="pk_test_8nOh4pljYTX09ZXSIAB9FB1o"
+								  data-amount="2000"
+								  data-name="GRIC Diwali - 2016"
+								  data-description="Payment for the Diwali party"
+								  data-image="/img/documentation/checkout/marketplace.png"
+								  data-billing-address="true"
+								  data-email="Preload from previous screen"									  
+								  data-locale="auto">
+								</script>
+								</form>	                    	
+							</td>
+						</tr>						
+	  			   </table>               				          
+	        </div>
+	  			<div id="step-4">
+	            <h2 class="StepTitle">Step 4: Other Details</h2>	
+	            <table cellspacing="3" cellpadding="3" align="center">
+	          			<tr>
+	                    	<td align="center" colspan="3">&nbsp;</td>
+	          			</tr>        
+	          			<tr>
+	                    	<td align="right">Hobbies :</td>
+	                    	<td align="left">
+	                    	  <input type="text" id="phone" name="phone" value="" class="txtBox">
+	                      </td>
+	                    	<td align="left"><span id="msg_phone"></span>&nbsp;</td>
+	          			</tr>          			
+	          			<tr>
+	                    	<td align="right">About You :</td>
+	                    	<td align="left">
+	                            <textarea name="address" id="address" class="txtBox" rows="5"></textarea>
+	                      </td>
+	                    	<td align="left"><span id="msg_address"></span>&nbsp;</td>
+	          			</tr>                                   			
+	  			   </table>                 			
+	        </div>
+	  		</div>
+	<!-- End SmartWizard Content -->  		
+	</form> 
+
 </body>
 </html>
