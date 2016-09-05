@@ -10,3 +10,24 @@ You need to download and run DynamoDB locally and set the endpoint to http://loc
 http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning
 
 ## Travis is failing, as the test needs a local instance of DynamoDB running. Tried setting up DynamoDBEmbedded, but it needs sqllite in classpath, so does not exactly help for Travis. 
+
+# Registration Flow
+
+## Step 1:
+![Registration Step 1:]
+(https://raw.githubusercontent.com/varunmehta/gric-diwali/master/docs/Registration%20Step%201_%20Inital%20Setup.png)
+
+
+## Step 2:
+![Registration Step 2:]
+(https://raw.githubusercontent.com/varunmehta/gric-diwali/master/docs/Registration%20Step%202_%20Family%20information.png)
+
+
+## Step 3:
+![Registration Step 3:]
+(https://raw.githubusercontent.com/varunmehta/gric-diwali/master/docs/Registration%20Step%203_%20Payment.png)
+
+## Step 4:
+![Registration Step 4:]
+(https://raw.githubusercontent.com/varunmehta/gric-diwali/master/docs/Registration%20Step%204_%20Confirmation!.png)
+
