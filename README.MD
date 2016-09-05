@@ -1,15 +1,7 @@
 [![Build Status](https://travis-ci.org/varunmehta/gric-diwali.svg?branch=master)](https://travis-ci.org/varunmehta/gric-diwali)
 
 # Glen Rock Indian Community - Diwali Registration
-
-Basic spring-boot app, which persists data to DynamoDB and integrates with Stripe for capturing payment info.
-
-## Pre-requisite
-You need to download and run DynamoDB locally and set the endpoint to http://localhost:8000
-
-http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning
-
-## Travis is failing, as the test needs a local instance of DynamoDB running. Tried setting up DynamoDBEmbedded, but it needs sqllite in classpath, so does not exactly help for Travis. 
+Basic spring-boot app, which persists data to DynamoDB and integrates with Stripe for capturing payment info. This will be deployed on either AWS or Heroku, depending upon what does the pricing allow finally!
 
 # Registration Flow
 
@@ -30,4 +22,16 @@ http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.ht
 ## Step 4:
 ![Registration Step 4:]
 (https://raw.githubusercontent.com/varunmehta/gric-diwali/master/docs/Registration%20Step%204_%20Confirmation!.png)
+
+
+# Contributing.
+Clone the project off git. 
+
+``` mvn clean install ```
+
+Import into your IDE. You need to download and run DynamoDB locally and set the endpoint to http://localhost:8000
+
+http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning
+
+**Travis is failing, as the test needs a local instance of DynamoDB running. Tried setting up DynamoDBEmbedded, but it needs sqllite in classpath, so does not exactly help for Travis.** 
 
