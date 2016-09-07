@@ -28,72 +28,71 @@ import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 @ProfileValueSourceConfiguration
 public class DiwaliRegistrationTest {
 
-	private static final String KEY_NAME = "id";
-	private static final Long READ_CAPACITY_UNITS = 5L;
-	private static final Long WRITE_CAPACITY_UNITS = 5L;
-	private static final String TABLE_NAME = "Family";
+  private static final String KEY_NAME = "id";
+  private static final Long READ_CAPACITY_UNITS = 5L;
+  private static final Long WRITE_CAPACITY_UNITS = 5L;
+  private static final String TABLE_NAME = "Family";
 
-	@Autowired
-	FamilyRepository repository;
+  @Autowired
+  FamilyRepository repository;
 
-	@Autowired
-	AmazonDynamoDB dynamodb;
+  @Autowired
+  AmazonDynamoDB dynamodb;
 
-	@Before
-	public void init() throws Exception {
+  @Before
+  public void init() throws Exception {
 
-		ListTablesResult listTablesResult = dynamodb.listTables();
+    ListTablesResult listTablesResult = dynamodb.listTables();
 
-		listTablesResult.getTableNames().stream().filter(tableName -> tableName.equals(TABLE_NAME))
-				.forEach(tableName -> {
-					dynamodb.deleteTable(tableName);
-				});
+    listTablesResult.getTableNames().stream().filter(tableName -> tableName.equals(TABLE_NAME)).forEach(tableName -> {
+      dynamodb.deleteTable(tableName);
+    });
 
-		List<AttributeDefinition> attributeDefinitions = new ArrayList<AttributeDefinition>();
-		attributeDefinitions.add(new AttributeDefinition().withAttributeName(KEY_NAME).withAttributeType("S"));
+    List<AttributeDefinition> attributeDefinitions = new ArrayList<AttributeDefinition>();
+    attributeDefinitions.add(new AttributeDefinition().withAttributeName(KEY_NAME).withAttributeType("S"));
 
-		List<KeySchemaElement> keySchemaElements = new ArrayList<KeySchemaElement>();
-		keySchemaElements.add(new KeySchemaElement().withAttributeName(KEY_NAME).withKeyType(KeyType.HASH));
+    List<KeySchemaElement> keySchemaElements = new ArrayList<KeySchemaElement>();
+    keySchemaElements.add(new KeySchemaElement().withAttributeName(KEY_NAME).withKeyType(KeyType.HASH));
 
-		CreateTableRequest request = new CreateTableRequest().withTableName(TABLE_NAME).withKeySchema(keySchemaElements)
-				.withAttributeDefinitions(attributeDefinitions).withProvisionedThroughput(new ProvisionedThroughput()
-						.withReadCapacityUnits(READ_CAPACITY_UNITS).withWriteCapacityUnits(WRITE_CAPACITY_UNITS));
+    CreateTableRequest request = new CreateTableRequest().withTableName(TABLE_NAME).withKeySchema(keySchemaElements)
+        .withAttributeDefinitions(attributeDefinitions).withProvisionedThroughput(new ProvisionedThroughput()
+            .withReadCapacityUnits(READ_CAPACITY_UNITS).withWriteCapacityUnits(WRITE_CAPACITY_UNITS));
 
-		dynamodb.createTable(request);
+    dynamodb.createTable(request);
 
-	}
+  }
 
-	@Test
-	public void registerFamilyTest() {
-		Family family = new Family("Test", "Glen Rock", 2, 1);
-		String familyNameCode = family.getFamilyNameCode();
-		repository.save(family);
+  @Test
+  public void registerFamilyTest() {
+    Family family = new Family("Test", "Glen Rock", 2, 1);
+    String familyNameCode = family.getFamilyNameCode();
+    repository.save(family);
 
-		Family family2 = new Family("Test", "Ridgewood", 2, 3);
-		repository.save(family2);
+    Family family2 = new Family("Test", "Ridgewood", 2, 3);
+    repository.save(family2);
 
-		Family family3 = repository.findByFamilyNameCode(familyNameCode);
+    Family family3 = repository.findByFamilyNameCode(familyNameCode);
 
-		Assert.assertEquals(family3, family);
-	}
+    Assert.assertEquals(family3, family);
+  }
 
-	@Test
-	public void registerFamilyWithMembersTest() {
-		Family family = new Family("Test", "Glen Rock", 2, 1);
-		String familyNameCode = family.getFamilyNameCode();
+  @Test
+  public void registerFamilyWithMembersTest() {
+    Family family = new Family("Test", "Glen Rock", 2, 1);
+    String familyNameCode = family.getFamilyNameCode();
 
-		for (int i = 0; i <= 6; i++) {
-			FamilyMember member = new FamilyMember("Firstname" + i, "Lastname" + i, "junk@example.com", "M", 7 + i,
-					false, true, true);
-			family.addFamilyMember(member);
-		}
-		repository.save(family);
+    for (int i = 0; i <= 6; i++) {
+      FamilyMember member = new FamilyMember("Fistname" + i, "LName " + i, "email" + i, "Gender" + i, i * 9, true, true,
+          true, true);
+      family.addFamilyMember(member);
+    }
+    repository.save(family);
 
-		Family family2 = repository.findByFamilyNameCode(familyNameCode);
+    Family family2 = repository.findByFamilyNameCode(familyNameCode);
 
-		Assert.assertEquals(family, family2);
+    Assert.assertEquals(family, family2);
 
-		System.out.println(family2.toString());
-	}
+    System.out.println(family2.toString());
+  }
 
 }

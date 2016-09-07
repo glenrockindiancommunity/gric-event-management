@@ -17,6 +17,7 @@ public class Family {
 	private String town;
 	private Integer adultCount;
 	private Integer childCount;
+	private Long amount;
 	private String paymentConfirmationId;
 	private List<FamilyMember> familyMembers = new ArrayList<FamilyMember>();;
 

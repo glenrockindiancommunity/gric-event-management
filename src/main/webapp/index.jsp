@@ -60,9 +60,19 @@
             <td align="center" colspan="3">&nbsp;</td>
           </tr>
           <tr>
-            <td align="center" colspan="3">
-              <p>Glen Rock Indian Community is back again with a Diwali Dhamaka for 2016. Fill in the registration to
-                register for the event.</p>
+            <td align="left" colspan="3">
+              <h2 align="center">The Glen Rock Indian Community proudly presents the 3rd annual "Diwali Dhamaka".</h2>
+
+              <ul>
+                <li>Participate in Laxmi puja, diya decoration and kids activities.</li>
+                <li>Enjoy cultural performances and musical Antakshari.</li>
+              </ul>
+
+              <p align="center">
+                <b>7:00 PM - 11:00 PM<br />Saturday, October 22, 2016 <br /> <br /> The Excelsior, <br />190 US-46,
+                  Saddle Brook, NJ 07663 <br /></b>
+              </p>
+
               <p>&nbsp;</p>
             </td>
           </tr>
@@ -86,6 +96,21 @@
             <td align="left"><input type="text" id="cpassword" name="cpassword" value="" class="txtBox"></td>
             <td align="left"><span id="msg_cpassword"></span>&nbsp;</td>
           </tr>
+          <tr>
+            <td colspan="3">
+              <p>
+                <b>Please note</b>
+              <ol>
+                <li>The event will accommodate the first 125 people.</li>
+                <li>Registration closes October 2nd</li>
+                <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
+                  get in touch with you ASAP</li>
+                <li>First entries to Glen Rock, event may be opened up to non GR families based on initial response.</li>
+              </ol>
+
+              <p>We look forward to seeing you.</p>
+            </td>
+          </tr>
 
         </table>
       </div>
@@ -94,6 +119,18 @@
         <table cellspacing="3" cellpadding="3" align="center">
           <tr>
             <td align="center" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <p>Entry - All Inclusive of appetizer, dinner, and deserts, applicable taxes &amp; gratuity</p>
+
+              <ul>
+                <li>Ages under 5 - free</li>
+                <li>Ages 5-11 - $20</li>
+                <li>Ages 12+ - $40</li>
+              </ul>
+
+            </td>
           </tr>
           <tr>
             <td align="right">First Name :</td>
@@ -127,7 +164,12 @@
           </tr>
           <tr>
             <td align="right">Participant :</td>
-            <td align="left"><input type="text" id="lastname" name="lastname" value="" class="txtBox"></td>
+            <td align="left"><input type="checkbox" id="lastname" name="lastname" value="" class="txtBox"></td>
+            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right">Volunteer :</td>
+            <td align="left"><input type="checkbox" id="lastname" name="lastname" value="" class="txtBox"></td>
             <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
           </tr>
 
@@ -153,7 +195,9 @@
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="pk_test_8nOh4pljYTX09ZXSIAB9FB1o" data-amount="2000" data-name="GRIC Diwali - 2016"
                   data-description="Payment for the Diwali party" data-image="/img/documentation/checkout/marketplace.png"
-                  data-billing-address="true" data-email="Preload from previous screen" data-locale="auto"> </script>
+                  data-billing-address="true" data-email="Preload from previous screen" data-locale="auto">
+																	
+																</script>
               </form>
             </td>
           </tr>

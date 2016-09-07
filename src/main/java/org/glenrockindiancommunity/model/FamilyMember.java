@@ -13,13 +13,14 @@ public class FamilyMember {
 	private Boolean primaryEmail;
 	private Boolean subscribeEmail;
 	private Boolean participant;
+	private Boolean volunteer;
 
 	public FamilyMember() {
-		// default constructor
+		// default constructor for testing, need better solution.
 	}
 
 	public FamilyMember(String firstName, String lastName, String email, String gender, Integer age,
-			Boolean primaryEmail, Boolean subscribeEmail, Boolean participant) {
+			Boolean primaryEmail, Boolean subscribeEmail, Boolean participant, Boolean volunteer) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -28,6 +29,7 @@ public class FamilyMember {
 		this.primaryEmail = primaryEmail;
 		this.subscribeEmail = subscribeEmail;
 		this.participant = participant;
+		this.volunteer = volunteer;
 	}
 
 	public String getFirstName() {
@@ -50,16 +52,20 @@ public class FamilyMember {
 		return age;
 	}
 
-	public Boolean getPrimaryEmail() {
+	public Boolean isPrimaryEmail() {
 		return primaryEmail;
 	}
 
-	public Boolean getSubscribeEmail() {
+	public Boolean isSubscribeEmail() {
 		return subscribeEmail;
 	}
 
-	public Boolean getParticipant() {
+	public Boolean isParticipant() {
 		return participant;
+	}
+
+	public Boolean isVolunteer() {
+		return volunteer;
 	}
 
 	public void setFirstName(String firstName) {
@@ -92,6 +98,10 @@ public class FamilyMember {
 
 	public void setParticipant(Boolean participant) {
 		this.participant = participant;
+	}
+
+	public void setVolunteer(Boolean volunteer) {
+		this.volunteer = volunteer;
 	}
 
 	@Override
