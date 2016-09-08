@@ -83,10 +83,5 @@ public class RegistrationController {
     return pCharge;
   }
 
-  public static void main(String[] args) {
-    RegistrationController controller = new RegistrationController();
-    System.out.println(controller.addStripeFeeToTotal(new BigDecimal(100.00)));
-
-  }
 
 }
