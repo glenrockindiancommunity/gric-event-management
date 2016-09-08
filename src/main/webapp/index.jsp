@@ -195,9 +195,7 @@
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="pk_test_8nOh4pljYTX09ZXSIAB9FB1o" data-amount="2000" data-name="GRIC Diwali - 2016"
                   data-description="Payment for the Diwali party" data-image="/img/documentation/checkout/marketplace.png"
-                  data-billing-address="true" data-email="Preload from previous screen" data-locale="auto">
-																	
-																</script>
+                  data-billing-address="true" data-email="Preload from previous screen" data-locale="auto"></script>
               </form>
             </td>
           </tr>

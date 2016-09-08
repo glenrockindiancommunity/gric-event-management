@@ -1,5 +1,7 @@
 package org.glenrockindiancommunity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,13 +12,16 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @EnableAutoConfiguration
 public class DiwaliRegistration {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DiwaliRegistration.class, args);
-	}
+  private static final Logger log = LoggerFactory.getLogger(DiwaliRegistration.class);
 
-	@Bean
-	static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+  public static void main(String[] args) {
+    log.info("Starting server...");
+    SpringApplication.run(DiwaliRegistration.class, args);
+  }
+
+  @Bean
+  static PropertySourcesPlaceholderConfigurer getPropertySourcesPlaceholderConfigurer() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
 
 }

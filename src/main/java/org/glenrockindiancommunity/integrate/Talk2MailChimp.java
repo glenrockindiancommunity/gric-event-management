@@ -4,7 +4,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.glenrockindiancommunity.DiwaliRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +31,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @Component
 public class Talk2MailChimp {
+  
+  private static final Logger log = LoggerFactory.getLogger(Talk2MailChimp.class);
+
 
 	@Value("${mail.chimp.endpoint}")
 	private String mailChimpEndpoint;
@@ -40,14 +47,16 @@ public class Talk2MailChimp {
 	@PostConstruct
 	void buildMailChimpRESTUrl() {
 		mailChimpURL = mailChimpEndpoint + "/" + mailChimpList;
-	
+
+		log.info("mailChimpURL " + mailChimpURL);
 	}
 
 	public void addSubscriber(List<MailChimpSubscriber> subscribers) {
 		AsyncRestTemplate template = new AsyncRestTemplate();
 
 		for (MailChimpSubscriber subscriber : subscribers) {
-//			template.postForEntity(mailChimpURL, request, responseType);
+		  log.info("Adding subscriber: " + subscriber.getEmailAddress()); 
+//			template.postForEntity(mailChimpURL, re, responseType);
 		}
 	}
 

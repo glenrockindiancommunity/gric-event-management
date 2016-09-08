@@ -44,13 +44,11 @@ public class DoEverything {
 
     try {
 
-      Long amount = 0L;
-
       // once the
-      String paymentConfirmationId = talk2Stripe.createCharge(primaryEmail, amount, family.getPaymentConfirmationId());
+      String stripeReceiptNumber = talk2Stripe.createCharge(primaryEmail, family.getAmount(), family.getStripeReceiptNumber());
 
       // reset it, as token id is just a temporary variable for it.
-      family.setPaymentConfirmationId(paymentConfirmationId);
+      family.setStripeReceiptNumber(stripeReceiptNumber);
 
       // Now that payment was successful, now save everything to database.
       repository.save(family);
@@ -58,12 +56,10 @@ public class DoEverything {
     } catch (Exception e) {
       throw new RuntimeException("There was an error processing your payment. Please get in touch with the organizers");
     }
-    
+
     // This has to be Async and non-dependent on the tx, if it fails, we'll
     // revist as to why later
     talk2MailChimp.addSubscriber(subscribers);
-    
-
 
   }
 
