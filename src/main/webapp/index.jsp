@@ -3,24 +3,26 @@
 <title>Glen Rock Indian Community - Diwali Registration</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link href="static/css/smart_wizard.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//cloud.typography.com/711858/764882/css/fonts.css" />
 
 <script type="text/javascript" src="static/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="static/js/jquery.smartWizard-2.0.min.js"></script>
+<script type="text/javascript" src="static/js/registration.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// Smart Wizard     	
 		$('#wizard').smartWizard({
-			transitionEffect : 'slideleft',/* onLeaveStep:leaveAStepCallback,*/
+			transitionEffect : 'fade',
+			enableAllSteps: false,
+			onLeaveStep : leaveAStepCallback,
 			onFinish : onFinishCallback,
-			enableFinishButton : true
+			enableFinishButton : false
 		});
 
-		/*   function leaveAStepCallback(obj){
-		 var step_num= obj.attr('rel');
-		 return validateSteps(step_num);
-		 }
-		 */
+		function leaveAStepCallback(obj) {
+			var step_num = obj.attr('rel');
+			return validateSteps(step_num);
+		}
+
 		function onFinishCallback() {
 			if (validateAllSteps()) {
 				$('form').submit();
@@ -55,7 +57,7 @@
       </ul>
       <div id="step-1">
         <h2 class="StepTitle">Step 1: Basic Info</h2>
-        <table cellspacing="3" cellpadding="3" align="center">
+        <table>
           <tr>
             <td align="center" colspan="3">&nbsp;</td>
           </tr>
@@ -78,106 +80,87 @@
           </tr>
           <tr>
             <td align="right">Last Name :</td>
-            <td align="left"><input type="text" id="username" name="username" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_username"></span>&nbsp;</td>
+            <td align="left"><input type="text" id="familyNameCode" name="familyNameCode" value="" class="txtBox"></td>
+            <td align="left"><span id="msg_familyNameCode"></span>&nbsp;</td>
           </tr>
           <tr>
             <td align="right">Town :</td>
-            <td align="left"><input type="text" id="password" name="password" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_password"></span>&nbsp;</td>
+            <td align="left"><select id="town" name="town" class="txtBox">
+                <option value="">-select-</option>
+                <option value="GR">Glen Rock</option>
+                <option value="RW">Ridgewood</option>
+                <option value="FL">Fair Lawn</option>
+                <option value="OH">Other</option>
+            </select></td>
+            <td align="left"><span id="msg_town"></span>&nbsp;</td>
           </tr>
           <tr>
             <td align="right">Adults :</td>
-            <td align="left"><input type="text" id="cpassword" name="cpassword" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_cpassword"></span>&nbsp;</td>
+            <td align="left"><input type="text" id="adults" name="adults" value="" class="numBox"></td>
+            <td align="left"><span id="msg_adults"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Kids :</td>
-            <td align="left"><input type="text" id="cpassword" name="cpassword" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_cpassword"></span>&nbsp;</td>
+            <td align="right">Children :</td>
+            <td align="left"><input type="text" id="children" name="children" value="0" class="numBox"></td>
+            <td align="left"><span id="msg_children"></span>&nbsp;</td>
           </tr>
           <tr>
             <td colspan="3">
-              <p>
-                <b>Please note</b>
-              <ol>
-                <li>The event will accommodate the first 125 people.</li>
-                <li>Registration closes October 2nd</li>
-                <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
-                  get in touch with you ASAP</li>
-                <li>First entries to Glen Rock, event may be opened up to non GR families based on initial response.</li>
-              </ol>
+              <p>Please note
+                <ol>
+                  <li>The event will accommodate the first 125 people.</li>
+                  <li>Registration closes October 2nd</li>
+                  <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
+                    get in touch with you ASAP</li>
+                  <li>First entries to Glen Rock, event may be opened up to non GR families based on initial response.</li>
+                </ol>
 
-              <p>We look forward to seeing you.</p>
+                <p>Entry - All Inclusive of appetizer, dinner, and deserts, applicable taxes &amp; gratuity</p>
+
+                <ul>
+                  <li>Ages under 5 - free</li>
+                  <li>Ages 5 - 11 - $20</li>
+                  <li>Ages 12+ - $40</li>
+                </ul>
+
+                <p>We look forward to seeing you.</p>
             </td>
           </tr>
-
         </table>
       </div>
       <div id="step-2">
         <h2 class="StepTitle">Step 2: Family Details</h2>
-        <table cellspacing="3" cellpadding="3" align="center">
+        <table id="tablesStep2">
           <tr>
-            <td align="center" colspan="3">&nbsp;</td>
+            <td align="center" colspan="6">&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="3">
-              <p>Entry - All Inclusive of appetizer, dinner, and deserts, applicable taxes &amp; gratuity</p>
-
-              <ul>
-                <li>Ages under 5 - free</li>
-                <li>Ages 5-11 - $20</li>
-                <li>Ages 12+ - $40</li>
-              </ul>
-
-            </td>
+            <th width="20%">First Name</th>
+            <th width="20%">Last Name</th>
+            <th width="20%">Email</th>
+            <th width="15%">Gender</th>
+            <th width="7%">Age</th>
+            <th width="7%">Participate</th>
+            <th width="7%">Volunteer</th>
           </tr>
-          <tr>
-            <td align="right">First Name :</td>
-            <td align="left"><input type="text" id="firstname" name="firstname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_firstname"></span>&nbsp;</td>
-          </tr>
-          <tr>
-            <td align="right">Last Name :</td>
-            <td align="left"><input type="text" id="lastname" name="lastname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
-          </tr>
-          <tr>
-            <td align="right">Email :</td>
-            <td align="left"><input type="text" id="lastname" name="lastname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
-          </tr>
-
-          <tr>
-            <td align="right">Gender :</td>
-            <td align="left"><select id="gender" name="gender" class="txtBox">
+          <tr id="members_0">
+            <td align="center"><input type="text" id="firstname_0" name="firstname_0" value="" class="txtBox"></td>
+            <td align="center"><input type="text" id="lastname_0" name="lastname_0" value="" class="txtBox"></td>
+            <td align="center"><input type="text" id="email_0" name="email_0" value="" class="txtBox"></td>
+            <td align="center"><select id="gender_0" name="gender_0" class="txtBox">
                 <option value="">-select-</option>
                 <option value="Female">Female</option>
                 <option value="Male">Male</option>
             </select></td>
-            <td align="left"><span id="msg_gender"></span>&nbsp;</td>
+            <td align="center"><input type="text" id="age_0" name="age_0" value="" class="numBox"></td>
+            <td align="center"><input type="checkbox" id="participate_0" name="participate_0" value="" class="numBox"></td>
+            <td align="center"><input type="checkbox" id="volunteer_0" name="volunteer_0" value="" class="numBox"></td>
           </tr>
-          <tr>
-            <td align="right">Age :</td>
-            <td align="left"><input type="text" id="lastname" name="lastname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
-          </tr>
-          <tr>
-            <td align="right">Participant :</td>
-            <td align="left"><input type="checkbox" id="lastname" name="lastname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
-          </tr>
-          <tr>
-            <td align="right">Volunteer :</td>
-            <td align="left"><input type="checkbox" id="lastname" name="lastname" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
-          </tr>
-
         </table>
       </div>
       <div id="step-3">
         <h2 class="StepTitle">Step 3: Payment Gateway</h2>
-        <table cellspacing="3" cellpadding="3" align="center">
+        <table >
           <tr>
             <td>
               <p>&nbsp;</p>
@@ -203,7 +186,7 @@
       </div>
       <div id="step-4">
         <h2 class="StepTitle">Step 4: Print Ticket</h2>
-        <table cellspacing="3" cellpadding="3" align="center">
+        <table>
           <tr>
             <td align="center">&nbsp;</td>
           </tr>

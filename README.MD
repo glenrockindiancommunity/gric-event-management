@@ -33,5 +33,4 @@ Import into your IDE. You need to download and run DynamoDB locally and set the 
 
 http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html#DynamoDBLocal.DownloadingAndRunning
 
-**Travis is failing, as the test needs a local instance of DynamoDB running. Tried setting up DynamoDBEmbedded, but it needs sqllite in classpath, so does not exactly help for Travis.** 
-
+**Travis was failing, as the test needs a local instance of DynamoDB running. Tried setting up DynamoDBEmbedded, but it needs sqllite in classpath, so does not exactly help for Travis.** 

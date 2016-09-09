@@ -4,7 +4,6 @@ import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRep
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.StringUtils;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -14,7 +13,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
 @Configuration
 @EnableDynamoDBRepositories(basePackages = "org.glenrockindiancommunity")
-@PropertySource("classpath:/aws-config.properties")
 public class DynamoDBConfig {
 
 	@Value("${amazon.dynamodb.endpoint}")

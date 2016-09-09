@@ -75,7 +75,7 @@ body {
   margin:0;   
   border:1px solid #E0E0E0;
   padding:5px;   
-  font: bold 16px 'Roboto', Arial, Helvetica, sans-serif; 
+  font: bold 18px 'Roboto', Arial, Helvetica, sans-serif; 
   color:#5A5655;   
   background-color:#E0E0E0;
   clear:both;
@@ -243,17 +243,38 @@ body {
 }
 
 /* Form Styles */
-
 .txtBox {
   border:1px solid #CCCCCC;
   color:#5A5655;
   font:13px 'Roboto',Arial,Helvetica,sans-serif;
   padding:2px;
-  width:430px;
+  width:150px;
 }
 .txtBox:focus {
   border:1px solid #EA8511;
 }
+
+table {
+	padding: 3px;
+	margin: 3px;
+  text-align: center;	
+}
+
+th {
+	text-align: centre;
+}
+
+.numBox {
+  border:1px solid #CCCCCC;
+  color:#5A5655;
+  font:13px 'Roboto',Arial,Helvetica,sans-serif;
+  padding:2px;
+  width:50px;
+}
+.numBox:focus {
+  border:1px solid #EA8511;
+}
+
 
 .swMain .loader {
   position:relative;  
