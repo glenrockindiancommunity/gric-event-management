@@ -203,7 +203,6 @@
 																							name : 'GRIC Diwali - 2016',
 																							description : 'Diwali Dhamaka!',
 																							zipCode : true,
-					                                    panelLabel: {{amount}},
 					                                    email: $('#primaryEmail').val(),
 																							amount : $(
 																									'#totalCharge')
