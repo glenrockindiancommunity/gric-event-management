@@ -1,8 +1,6 @@
 package org.glenrockindiancommunity.model;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
-
-@DynamoDBDocument
+@Deprecated()
 public class FamilyMember {
 
   private String firstName;
@@ -10,8 +8,6 @@ public class FamilyMember {
   private String email;
   private String gender;
   private Integer age;
-  private Boolean primaryEmail;
-  private Boolean subscribeEmail;
   private Boolean participant;
   private Boolean volunteer;
 
@@ -19,15 +15,13 @@ public class FamilyMember {
     // default constructor for testing, need better solution.
   }
 
-  public FamilyMember(String firstName, String lastName, String email, String gender, Integer age, Boolean primaryEmail,
-      Boolean subscribeEmail, Boolean participant, Boolean volunteer) {
+  public FamilyMember(String firstName, String lastName, String email, String gender, Integer age, Boolean participant,
+      Boolean volunteer) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.gender = gender;
     this.age = age;
-    this.primaryEmail = primaryEmail;
-    this.subscribeEmail = subscribeEmail;
     this.participant = participant;
     this.volunteer = volunteer;
   }
@@ -50,14 +44,6 @@ public class FamilyMember {
 
   public Integer getAge() {
     return age;
-  }
-
-  public Boolean isPrimaryEmail() {
-    return primaryEmail;
-  }
-
-  public Boolean isSubscribeEmail() {
-    return subscribeEmail;
   }
 
   public Boolean isParticipant() {
@@ -88,14 +74,6 @@ public class FamilyMember {
     this.age = age;
   }
 
-  public void setPrimaryEmail(Boolean primaryEmail) {
-    this.primaryEmail = primaryEmail;
-  }
-
-  public void setSubscribeEmail(Boolean subscribeEmail) {
-    this.subscribeEmail = subscribeEmail;
-  }
-
   public void setParticipant(Boolean participant) {
     this.participant = participant;
   }
@@ -114,8 +92,6 @@ public class FamilyMember {
     result = prime * result + ((gender == null) ? 0 : gender.hashCode());
     result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
     result = prime * result + ((participant == null) ? 0 : participant.hashCode());
-    result = prime * result + ((primaryEmail == null) ? 0 : primaryEmail.hashCode());
-    result = prime * result + ((subscribeEmail == null) ? 0 : subscribeEmail.hashCode());
     result = prime * result + ((volunteer == null) ? 0 : volunteer.hashCode());
     return result;
   }
@@ -159,16 +135,6 @@ public class FamilyMember {
         return false;
     } else if (!participant.equals(other.participant))
       return false;
-    if (primaryEmail == null) {
-      if (other.primaryEmail != null)
-        return false;
-    } else if (!primaryEmail.equals(other.primaryEmail))
-      return false;
-    if (subscribeEmail == null) {
-      if (other.subscribeEmail != null)
-        return false;
-    } else if (!subscribeEmail.equals(other.subscribeEmail))
-      return false;
     if (volunteer == null) {
       if (other.volunteer != null)
         return false;
@@ -180,8 +146,7 @@ public class FamilyMember {
   @Override
   public String toString() {
     return "FamilyMember [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender
-        + ", age=" + age + ", primaryEmail=" + primaryEmail + ", subscribeEmail=" + subscribeEmail + ", participant="
-        + participant + ", volunteer=" + volunteer + "]";
+        + ", age=" + age + ", participant=" + participant + ", volunteer=" + volunteer + "]";
   }
 
 }

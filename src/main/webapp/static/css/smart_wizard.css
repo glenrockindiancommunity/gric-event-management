@@ -42,7 +42,7 @@ body {
   background-color:#F8F8F8;  
   height:98%;
   text-align:left;
-  overflow:visible;    
+  overflow:auto;    
   z-index:88; 
   -webkit-border-radius: 5px;
   -moz-border-radius  : 5px;
@@ -257,7 +257,7 @@ body {
 table {
 	padding: 3px;
 	margin: 3px;
-  text-align: center;	
+  text-align: center;
 }
 
 th {

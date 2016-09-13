@@ -23,17 +23,29 @@ public class RegistrationController {
   @Autowired
   private DoEverything doEverything;
 
+  /**
+   * Submit the form to db, all in!
+   * 
+   * @param family
+   * @param model
+   * @return
+   */
   @PostMapping(path = "/register/family", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public String registerFamily(@RequestBody Family family, Model model) {
 
     log.info("Controller calling acceptPaymentSubscribeToMailChimpAndRegisterFamily");
 
-    doEverything.acceptPaymentSubscribeToMailChimpAndRegisterFamily(family);
-    return "confirmed";
+    try {
+      doEverything.acceptPaymentSubscribeToMailChimpAndRegisterFamily(family);
+    } catch (Exception e) {
+      log.error("Error submitting form " + e.getMessage());
+      return "There was an error submitting your request " + e.getMessage();
+    }
+    return "Thank you for submitting your ";
   }
 
   /**
-   * Add the PvTv math from Stripe.
+   * Calculate the final cost of the event.
    * 
    * @param townCode
    * @param adultCount
@@ -44,8 +56,19 @@ public class RegistrationController {
   @GetMapping(path = "/register/calculatetotal/{townCode}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public BigDecimal calculateTotal(@PathVariable String townCode, @PathVariable int adultCount,
       @PathVariable int childCount, Model model) {
-    return null;
+    log.info("Calculating cost...");
+    return doEverything.calculateTotalCharge(townCode, adultCount, childCount);
   }
 
+  /**
+   * Testing in browser.
+   * 
+   * @param model
+   * @return
+   */
+  @GetMapping(path = "/register/hello")
+  public String showHello(Model model) {
+    return "Hello Test REST Registration";
+  }
 
 }

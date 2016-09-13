@@ -1,45 +1,26 @@
 <html>
 <head>
 <title>Glen Rock Indian Community - Diwali Registration</title>
+
+<!-- Include CSS -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link href="static/css/smart_wizard.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="static/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="static/js/jquery.smartWizard-2.0.min.js"></script>
+<!-- Include JS -->
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script type="text/javascript" src="static/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.smartWizard.js"></script>
 <script type="text/javascript" src="static/js/registration.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		// Smart Wizard     	
-		$('#wizard').smartWizard({
-			transitionEffect : 'fade',
-			enableAllSteps: false,
-			onLeaveStep : leaveAStepCallback,
-			onFinish : onFinishCallback,
-			enableFinishButton : false
-		});
-
-		function leaveAStepCallback(obj) {
-			var step_num = obj.attr('rel');
-			return validateSteps(step_num);
-		}
-
-		function onFinishCallback() {
-			if (validateAllSteps()) {
-				$('form').submit();
-			}
-		}
-	});
-</script>
 </head>
 <body>
   <h1>Glen Rock Indian Community Diwali Registration - 2016</h1>
-  <form action="#" method="POST">
+  <form action="#" method="POST" id="mainForm">
     <input type='hidden' name="issubmit" value="1">
     <!-- Tabs -->
     <div id="wizard" class="swMain">
       <ul>
-        <li><a href="#step-1"> <span class="stepNumber">1</span> <span class="stepDesc"> Basic Info<br /> <small>Provide
-                basic info</small>
+        <li><a href="#step-1"> <span class="stepNumber">1</span> <span class="stepDesc"> Welcome<br /> <small>Happy
+                Diwali!</small>
           </span>
         </a></li>
         <li><a href="#step-2"> <span class="stepNumber">2</span> <span class="stepDesc"> Family Details<br />
@@ -56,35 +37,85 @@
         </a></li>
       </ul>
       <div id="step-1">
-        <h2 class="StepTitle">Step 1: Basic Info</h2>
+        <h2 class="StepTitle">Step 1: Welcome</h2>
         <table>
           <tr>
             <td align="center" colspan="3">&nbsp;</td>
           </tr>
           <tr>
-            <td align="left" colspan="3">
-              <h2 align="center">The Glen Rock Indian Community proudly presents the 3rd annual "Diwali Dhamaka".</h2>
+            <td colspan="3" align="left">
+              <h2 align="center">The Glen Rock Indian Community proudly presents the 3rd annual "Diwali Dhamaka"</h2>
 
               <ul>
-                <li>Participate in Laxmi puja, diya decoration and kids activities.</li>
-                <li>Enjoy cultural performances and musical Antakshari.</li>
+                <li>Participate in Laxmi puja, diya decoration and kids activities</li>
+                <li>Enjoy cultural performances and programs</li>
               </ul>
 
-              <p align="center">
-                <b>7:00 PM - 11:00 PM<br />Saturday, October 22, 2016 <br /> <br /> The Excelsior, <br />190 US-46,
-                  Saddle Brook, NJ 07663 <br /></b>
-              </p>
+              <h2 align="center">
+                7:00 PM - 11:00 PM<br />Saturday, October 22, 2016
+              </h2>
 
-              <p>&nbsp;</p>
             </td>
           </tr>
           <tr>
-            <td align="right">Last Name :</td>
-            <td align="left"><input type="text" id="familyNameCode" name="familyNameCode" value="" class="txtBox"></td>
-            <td align="left"><span id="msg_familyNameCode"></span>&nbsp;</td>
+            <td colspan="3" align="left">&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Town :</td>
+            <td align="left" colspan="3">
+              <p align="center">
+                <b>The Excelsior, <br />190 US-46, Saddle Brook, NJ 07663 <br /> <br />
+                </b>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.20469942012!2d-74.099133584143!3d40.88932443468427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f96256082115%3A0x3b90c1b864be0f25!2sThe+Excelsior+Catering!5e0!3m2!1sen!2sus!4v1473460458353"
+                  width="600" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>
+              </p>
+              <p>&nbsp;</p>
+              <h3>Please note</h3>
+              <ol>
+                <li>The event will accommodate first 125 people who register</li>
+                <li>Registration closes October 2nd</li>
+                <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
+                  get in touch with you ASAP</li>
+              </ol>
+
+              <p>Entry - All Inclusive of appetizer, dinner, and deserts, applicable taxes &amp; gratuity</p>
+
+              <ul>
+                <li>Ages under 5 - free</li>
+                <li>Ages 5 - 11 - $20</li>
+                <li>Ages 12+ - $40</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="step-2">
+        <h2 class="StepTitle">Step 2: Family Details</h2>
+        <table>
+          <tr>
+            <td align="center" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right">Last Name<span class="required">*</span> :
+            </td>
+            <td align="left"><input type="text" id="lastname" name="lastname" value="" class="txtBox"></td>
+            <td align="left"><span id="msg_lastname"></span>&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right">First Name<span class="required">*</span> :
+            </td>
+            <td align="left"><input type="text" id="firstname" name="firstname" value="" class="txtBox"></td>
+            <td align="left"><span id="msg_firstname"></span>&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right">Primary Email<span class="required">*</span> :
+            </td>
+            <td align="left"><input type="text" id="primaryEmail" name="primaryEmail" value="" class="txtBox"></td>
+            <td align="left"><span id="msg_primaryEmail"></span>&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right">Town<span class="required">*</span> :
+            </td>
             <td align="left"><select id="town" name="town" class="txtBox">
                 <option value="">-select-</option>
                 <option value="GR">Glen Rock</option>
@@ -95,75 +126,39 @@
             <td align="left"><span id="msg_town"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Adults :</td>
+            <td align="right">Adults<span class="required">*</span> :
+            </td>
             <td align="left"><input type="text" id="adults" name="adults" value="" class="numBox"></td>
             <td align="left"><span id="msg_adults"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Children :</td>
+            <td align="right">Children<span class="required">*</span> :
+            </td>
             <td align="left"><input type="text" id="children" name="children" value="0" class="numBox"></td>
             <td align="left"><span id="msg_children"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td colspan="3">
-              <p>Please note
-                <ol>
-                  <li>The event will accommodate the first 125 people.</li>
-                  <li>Registration closes October 2nd</li>
-                  <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
-                    get in touch with you ASAP</li>
-                  <li>First entries to Glen Rock, event may be opened up to non GR families based on initial response.</li>
-                </ol>
-
-                <p>Entry - All Inclusive of appetizer, dinner, and deserts, applicable taxes &amp; gratuity</p>
-
-                <ul>
-                  <li>Ages under 5 - free</li>
-                  <li>Ages 5 - 11 - $20</li>
-                  <li>Ages 12+ - $40</li>
-                </ul>
-
-                <p>We look forward to seeing you.</p>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div id="step-2">
-        <h2 class="StepTitle">Step 2: Family Details</h2>
-        <table id="tablesStep2">
-          <tr>
-            <td align="center" colspan="6">&nbsp;</td>
+            <td align="right">Participate :</td>
+            <td align="left" colspan="2"><input type="checkbox" id="participant" name="participant" value="true"
+              class="numBox"></td>
           </tr>
           <tr>
-            <th width="20%">First Name</th>
-            <th width="20%">Last Name</th>
-            <th width="20%">Email</th>
-            <th width="15%">Gender</th>
-            <th width="7%">Age</th>
-            <th width="7%">Participate</th>
-            <th width="7%">Volunteer</th>
+            <td align="right">Volunteer :</td>
+            <td align="left" colspan="2"><input type="checkbox" id="volunteer" name="volunteer" value="true"
+              class="numBox"></td>
           </tr>
-          <tr id="members_0">
-            <td align="center"><input type="text" id="firstname_0" name="firstname_0" value="" class="txtBox"></td>
-            <td align="center"><input type="text" id="lastname_0" name="lastname_0" value="" class="txtBox"></td>
-            <td align="center"><input type="text" id="email_0" name="email_0" value="" class="txtBox"></td>
-            <td align="center"><select id="gender_0" name="gender_0" class="txtBox">
-                <option value="">-select-</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-            </select></td>
-            <td align="center"><input type="text" id="age_0" name="age_0" value="" class="numBox"></td>
-            <td align="center"><input type="checkbox" id="participate_0" name="participate_0" value="" class="numBox"></td>
-            <td align="center"><input type="checkbox" id="volunteer_0" name="volunteer_0" value="" class="numBox"></td>
+          <tr>
+            <td align="center" colspan="3">&nbsp;</td>
           </tr>
         </table>
       </div>
       <div id="step-3">
         <h2 class="StepTitle">Step 3: Payment Gateway</h2>
-        <table >
+        <table>
           <tr>
-            <td>
+            <td align="left">
               <p>&nbsp;</p>
+              <h1 id="totalCharge"></h1>
               <ul>
                 <li>Click on the "Pay Now" button below</li>
                 <li>Pay by credit or debit card.</li>
@@ -174,12 +169,65 @@
           </tr>
           <tr>
             <td align="center">
-              <form action="/your-charge-code" method="POST">
+              <button id="customButton" class="stripe-button">Purchase Ticket</button> <script type="text/javascript">
+															var handler = StripeCheckout
+																	.configure({
+																		key : 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+																		image : 'static/images/diya.png',
+																		locale : 'auto',
+																		panelLabel: 'Pay {{amount}}',
+																		email: $('#primaryEmail').val(),
+																		amount : $(
+																				'#totalCharge')
+																				.val() * 100,
+																		token : function(
+																				token) {
+																			alert($(
+																					'#totalCharge')
+																					.val() * 100);
+																			// You can access the token ID with `token.id`.
+																			// Get the token ID to your server-side code for use.
+																		}
+																	});
+
+															document
+																	.getElementById(
+																			'customButton')
+																	.addEventListener(
+																			'click',
+																			function(
+																					e) {
+																				// Open Checkout with further options:
+																				handler
+																						.open({
+																							name : 'GRIC Diwali - 2016',
+																							description : 'Diwali Dhamaka!',
+																							zipCode : true,
+					                                    panelLabel: {{amount}},
+					                                    email: $('#primaryEmail').val(),
+																							amount : $(
+																									'#totalCharge')
+																									.val() * 100
+																						});
+																				e
+																						.preventDefault();
+																			});
+
+															// Close Checkout on page navigation:
+															window
+																	.addEventListener(
+																			'popstate',
+																			function() {
+																				handler
+																						.close();
+																			});
+														</script> <!--               <form action="/your-charge-code" method="POST">
                 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="pk_test_8nOh4pljYTX09ZXSIAB9FB1o" data-amount="2000" data-name="GRIC Diwali - 2016"
                   data-description="Payment for the Diwali party" data-image="/img/documentation/checkout/marketplace.png"
                   data-billing-address="true" data-email="Preload from previous screen" data-locale="auto"></script>
               </form>
+ -->
             </td>
           </tr>
         </table>
@@ -191,7 +239,7 @@
             <td align="center">&nbsp;</td>
           </tr>
           <tr>
-            <td>
+            <td align="left">
               <p>
                 Thank you for your registration. Your identification code for the event is: <b>registration_id</b>
               </p>

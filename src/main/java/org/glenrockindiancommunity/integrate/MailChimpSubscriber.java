@@ -44,5 +44,17 @@ public class MailChimpSubscriber {
       return lname;
     }
 
+    @Override
+    public String toString() {
+      return "MergeFields [fname=" + fname + ", lname=" + lname + "]";
+    }
+
   }
+
+  @Override
+  public String toString() {
+    return "MailChimpSubscriber [mergeFields=" + mergeFields.toString() + ", emailAddress=" + emailAddress + ", status="
+        + status + "]";
+  }
+
 }

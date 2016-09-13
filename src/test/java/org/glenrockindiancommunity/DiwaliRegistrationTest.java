@@ -1,19 +1,17 @@
 package org.glenrockindiancommunity;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.glenrockindiancommunity.model.Family;
-import org.glenrockindiancommunity.model.FamilyMember;
 import org.glenrockindiancommunity.respository.FamilyRepository;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -24,9 +22,9 @@ import com.amazonaws.services.dynamodbv2.model.KeyType;
 import com.amazonaws.services.dynamodbv2.model.ListTablesResult;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 
-@Ignore("For Travis")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { DynamoDBConfig.class })
+@TestPropertySource("classpath:/config.properties")
 public class DiwaliRegistrationTest {
 
   private static final String KEY_NAME = "id";
@@ -35,10 +33,10 @@ public class DiwaliRegistrationTest {
   private static final String TABLE_NAME = "Family";
 
   @Autowired
-  FamilyRepository repository;
+  private FamilyRepository repository;
 
   @Autowired
-  AmazonDynamoDB dynamodb;
+  private AmazonDynamoDB dynamodb;
 
   @Before
   public void init() throws Exception {
@@ -65,35 +63,16 @@ public class DiwaliRegistrationTest {
 
   @Test
   public void registerFamilyTest() {
-    Family family = new Family("Test1", "Glen Rock", 4, 3, new BigDecimal(100));
+    Family family = new Family("Lastname", "firstname", "GR", 2, 2, "test@example.com", true, true);
     String familyNameCode = family.getFamilyNameCode();
     repository.save(family);
 
-    Family family2 = new Family("Test2", "Ridgewood", 2, 3, new BigDecimal(200));
+    Family family2 = new Family("Lastname_2", "firstname_2", "GR", 4, 0, "test@example.com", true, false);
     repository.save(family2);
 
     Family family3 = repository.findByFamilyNameCode(familyNameCode);
 
     Assert.assertEquals(family3, family);
-  }
-
-  @Test
-  public void registerFamilyWithMembersTest() {
-    Family family = new Family("Test1", "Glen Rock", 2, 1, new BigDecimal(100));
-    String familyNameCode = family.getFamilyNameCode();
-
-    for (int i = 0; i <= 6; i++) {
-      FamilyMember member = new FamilyMember("Fistname" + i, "LName " + i, "email" + i, "Gender" + i, i * 9, true, true,
-          true, true);
-      family.addFamilyMember(member);
-    }
-    repository.save(family);
-
-    Family family2 = repository.findByFamilyNameCode(familyNameCode);
-
-    Assert.assertEquals(family, family2);
-
-    System.out.println(family2.toString());
   }
 
 }

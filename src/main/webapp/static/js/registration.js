@@ -1,28 +1,89 @@
+$(document).ready(
+		function() {
+			// Smart Wizard
+			$('#wizard').smartWizard({
+				/* contentURL: '/register/family', */
+				transitionEffect : 'slideLeft',
+				enableAllSteps : false,
+				keyNavigation : false, // Enable/Disable key navigation(left
+										// and right keys are used if enabled)
+				hideButtonsOnDisabled : true,
+				onLeaveStep : leaveAStepCallback,
+				onShowStep : showStepCallback,
+				onFinish : onFinishCallback,
+				enableFinishButton : false
+			});
+
+			function leaveAStepCallback(obj) {
+				var step_num = obj.attr('rel');
+				return validateSteps(step_num);
+			}
+
+			function showStepCallback(obj) {
+				var step = obj.attr('rel');
+				var town = $('#town').val();
+				var adults = $('#adults').val();
+				var children = $('#children').val();
+				var url = "/register/calculatetotal/" + town + "/" + adults
+						+ "/" + children;
+				if (step == 3) {
+					$.get(url, function(data, status) {
+						$('#totalCharge').text(
+								'Total charge for the event: $' + data);
+					});
+				}
+			}
+
+			function onFinishCallback() {
+				if (validateAllSteps()) {
+					// $('form').submit();
+					var form = document.getElementById("mainForm");
+					// stop the regular form submission
+					// collect the form data while iterating over the inputs
+					var data = {};
+					for (var i = 0, ii = form.length; i < ii; ++i) {
+						var input = form[i];
+						if (input.name) {
+							data[input.name] = input.value;
+						}
+					}
+					addData(data);
+				}
+			}
+		});
+
+function addData(dataIn) {
+	$.ajax({
+		type : "POST",
+		url : "/register/family",
+		data : JSON.stringify(dataIn),
+		contentType : "application/json; charset=utf-8",
+		crossDomain : false,
+		dataType : "json",
+		success : function(data, status, jqXHR) {
+			alert(success);
+		},
+
+		error : function(jqXHR, status) {
+			// error handler
+			console.log(jqXHR);
+			alert('fail' + status.code);
+		}
+	});
+}
+
 function validateAllSteps() {
 	var isStepValid = true;
-
-	if (validateStep1() == false) {
-		isStepValid = false;
-		$('#wizard').smartWizard('setError', {
-			stepnum : 1,
-			iserror : true
-		});
-	} else {
-		$('#wizard').smartWizard('setError', {
-			stepnum : 1,
-			iserror : false
-		});
-	}
 
 	if (validateStep2() == false) {
 		isStepValid = false;
 		$('#wizard').smartWizard('setError', {
-			stepnum : 2,
+			stepnum : 1,
 			iserror : true
 		});
 	} else {
 		$('#wizard').smartWizard('setError', {
-			stepnum : 2,
+			stepnum : 1,
 			iserror : false
 		});
 	}
@@ -38,27 +99,7 @@ function validateAllSteps() {
 function validateSteps(step) {
 	var isStepValid = true;
 	// validate step 1
-	if (step == 1) {
-		if (validateStep1() == false) {
-			isStepValid = false;
-			$('#wizard').smartWizard(
-					'showMessage',
-					'Please correct the errors in Step' + step
-							+ ' and click next.');
-			$('#wizard').smartWizard('setError', {
-				stepnum : step,
-				iserror : true
-			});
-		} else {
-			$('#wizard').smartWizard('setError', {
-				stepnum : step,
-				iserror : false
-			});
-		}
-	}
-
-	// validate step3
-	if (step == 3) {
+	if (step == 2) {
 		if (validateStep2() == false) {
 			isStepValid = false;
 			$('#wizard').smartWizard(
@@ -80,15 +121,38 @@ function validateSteps(step) {
 	return isStepValid;
 }
 
-function validateStep1() {
+function validateStep2() {
 	var isValid = true;
 	// Validate lastname
-	var ln = $('#familyNameCode').val();
+	var ln = $('#lastname').val();
 	if (!ln && ln.length <= 0) {
 		isValid = false;
-		$('#msg_familyNameCode').html('Please provide a Lastname').show();
+		$('#msg_lastname').html('Please provide a Lastname').show();
 	} else {
-		$('#msg_familyNameCode').html('').hide();
+		$('#msg_lastname').html('').hide();
+	}
+
+	// Validate firstname
+	var ln = $('#firstname').val();
+	if (!ln && ln.length <= 0) {
+		isValid = false;
+		$('#msg_firstname').html('Please provide a Firstname').show();
+	} else {
+		$('#msg_firstname').html('').hide();
+	}
+
+	// validate email
+	var email = $('#primaryEmail').val();
+	if (email && email.length > 0) {
+		if (!isValidEmailAddress(email)) {
+			isValid = false;
+			$('#msg_primaryEmail').html('Email is invalid').show();
+		} else {
+			$('#msg_primaryEmail').html('').hide();
+		}
+	} else {
+		isValid = false;
+		$('#msg_primaryEmail').html('Please enter email').show();
 	}
 
 	// validate town
@@ -118,61 +182,6 @@ function validateStep1() {
 		$('#msg_children').html('').hide();
 	}
 
-	// validate password match
-	// if (pw && pw.length > 0 && cpw && cpw.length > 0) {
-	// if (pw != cpw) {
-	// isValid = false;
-	// $('#msg_cpassword').html('Password mismatch').show();
-	// } else {
-	// $('#msg_cpassword').html('').hide();
-	// }
-	// }
-	
-	if (isValid) {
-		var total = parseInt(adults) + parseInt(children);
-		addRows(total);
-	}
-	
-	return isValid;
-}
-
-function resetRows() {
-	
-}
-
-function addRows(rows) {
-	for (var i = 1; i < rows; i++) {
-		var row = $("#tablesStep2 tr").last().clone();
-		var oldId = Number(row.attr('id').slice(-1));
-		var id = oldId + 1;
-		row.attr('id', 'members_' + id);
-		row.find('#firstname_' + oldId).attr('id', 'firstname_' + id);
-		row.find('#lastname_' + oldId).attr('id', 'lastname_' + id);
-		row.find('#email_' + oldId).attr('id', 'email_' + id);
-		row.find('#gender_' + oldId).attr('id', 'gender_' + id);
-		row.find('#age_' + oldId).attr('id', 'age_' + id);
-		row.find('#participate_' + oldId).attr('id', 'participate_' + id);
-		row.find('#volunteer_' + oldId).attr('id', 'volunteer_' + id);
-
-		$('#tablesStep2').append(row);
-	}
-}
-
-function validateStep2() {
-	var isValid = true;
-	// validate email email
-	var email = $('#email').val();
-	if (email && email.length > 0) {
-		if (!isValidEmailAddress(email)) {
-			isValid = false;
-			$('#msg_email').html('Email is invalid').show();
-		} else {
-			$('#msg_email').html('').hide();
-		}
-	} else {
-		isValid = false;
-		$('#msg_email').html('Please enter email').show();
-	}
 	return isValid;
 }
 

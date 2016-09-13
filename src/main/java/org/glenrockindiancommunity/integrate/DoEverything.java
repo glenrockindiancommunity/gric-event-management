@@ -1,17 +1,15 @@
 package org.glenrockindiancommunity.integrate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.glenrockindiancommunity.model.Family;
-import org.glenrockindiancommunity.model.FamilyMember;
 import org.glenrockindiancommunity.respository.FamilyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 @Component
 public class DoEverything {
@@ -52,28 +50,17 @@ public class DoEverything {
 
     log.info("Accepting payment for family " + family.toString());
 
-    String primaryEmail = family.getPrimaryEmail();
-
-    // Some pre-processing
-    List<MailChimpSubscriber> subscribers = new ArrayList<MailChimpSubscriber>();
-    for (FamilyMember member : family.getFamilyMembers()) {
-
-      if (member.isPrimaryEmail()) {
-        primaryEmail = member.getEmail();
-      }
-
-      if (member.isSubscribeEmail()) {
-        subscribers.add(new MailChimpSubscriber(member.getFirstName(), member.getLastName(), member.getEmail()));
-      }
-    }
-
     try {
+
+      BigDecimal recalculatedAmount = calculateTotalCharge(family.getTown(), family.getAdults(), family.getChildren());
+      
+      family.setAmount(recalculatedAmount);
 
       // once the
       log.info("Calling Stripe to charge...");
 
-      String stripeReceiptNumber = talk2Stripe.createCharge(primaryEmail, family.getAmount(),
-          family.getStripeReceiptNumber());
+      String stripeReceiptNumber = "RANDOM-STRING";
+          // talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(), family.getStripeReceiptNumber());
 
       // reset it, as token id is just a temporary variable for it.
       family.setStripeReceiptNumber(stripeReceiptNumber);
@@ -83,13 +70,13 @@ public class DoEverything {
       repository.save(family);
 
     } catch (Exception e) {
-      throw new RuntimeException("There was an error processing your payment. Please get in touch with the organizers");
+      throw new RuntimeException(e.getMessage() +  "There was an error processing your payment. Please get in touch with the organizers");
     }
 
     log.info("Subscribing to mailchimp...");
     // This has to be Async and non-dependent on the tx, if it fails, we'll
     // revist as to why later
-    talk2MailChimp.addSubscriber(subscribers);
+    talk2MailChimp.addSubscriber(family.getFirstname(), family.getLastname(), family.getPrimaryEmail());
 
   }
 
@@ -113,7 +100,7 @@ public class DoEverything {
 
     log.info("Base total charge for GR in cents : " + totalCharge);
 
-    if (townCode != "GR") {
+    if (!"GR".equalsIgnoreCase(townCode)) {
       totalCharge = totalCharge.add(totalCharge.multiply(nonGRMarkup));
       log.info("Base total charge if not from GR: " + totalCharge);
     }

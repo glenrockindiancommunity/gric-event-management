@@ -28,33 +28,39 @@ import org.springframework.web.client.AsyncRestTemplate;
  */
 @Component
 public class Talk2MailChimp {
-  
+
   private static final Logger log = LoggerFactory.getLogger(Talk2MailChimp.class);
 
+  @Value("${mail.chimp.endpoint}")
+  private String mailChimpEndpoint;
 
-	@Value("${mail.chimp.endpoint}")
-	private String mailChimpEndpoint;
+  @Value("${mail.chimp.list}")
+  private String mailChimpList;
 
-	@Value("${mail.chimp.list}")
-	private String mailChimpList;
-	
-	private String mailChimpURL;
+  private String mailChimpURL;
 
-	
-	@PostConstruct
-	void buildMailChimpRESTUrl() {
-		mailChimpURL = mailChimpEndpoint + "/" + mailChimpList;
+  @PostConstruct
+  void buildMailChimpRESTUrl() {
+    mailChimpURL = mailChimpEndpoint + "/" + mailChimpList;
 
-		log.info("mailChimpURL " + mailChimpURL);
-	}
+    log.info("mailChimpURL " + mailChimpURL);
+  }
 
-	public void addSubscriber(List<MailChimpSubscriber> subscribers) {
-		AsyncRestTemplate template = new AsyncRestTemplate();
+  public void addSubscriber(List<MailChimpSubscriber> subscribers) {
+    AsyncRestTemplate template = new AsyncRestTemplate();
 
-		for (MailChimpSubscriber subscriber : subscribers) {
-		  log.info("Adding subscriber: " + subscriber.getEmailAddress()); 
-//			template.postForEntity(mailChimpURL, re, responseType);
-		}
-	}
+    for (MailChimpSubscriber subscriber : subscribers) {
+      log.info("Adding subscriber: " + subscriber.getEmailAddress());
+      // template.postForEntity(mailChimpURL, re, responseType);
+    }
+  }
 
+  public void addSubscriber(String firstname, String lastname, String email) {
+    AsyncRestTemplate template = new AsyncRestTemplate();
+
+    MailChimpSubscriber subscriber = new MailChimpSubscriber(firstname, lastname, email);
+
+    log.info("Adding subscriber: " + subscriber.toString());
+    // template.postForEntity(mailChimpURL, re, responseType);
+  }
 }
