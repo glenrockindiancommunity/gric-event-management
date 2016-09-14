@@ -63,8 +63,14 @@ public class RegistrationController {
     log.info("Calculating cost...");
     return doEverything.calculateTotalCharge(townCode, adultCount, childCount);
   }
-  
-  @GetMapping(path="/register/showall", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+
+  /**
+   * Json response of all the users registered for the event so far...
+   * 
+   * @param model
+   * @return
+   */
+  @GetMapping(path = "/register/showall", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public List<Family> showAllRegisteredUsers(Model model) {
     return doEverything.showAll();
   }
