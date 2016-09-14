@@ -30,10 +30,12 @@ public class RegistrationController {
    * @param model
    * @return
    */
-  @PostMapping(path = "/register/family", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public String registerFamily(@RequestBody Family family, Model model) {
+  @PostMapping(path = "/register/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String registerFamily(@PathVariable String tokenId, @RequestBody Family family, Model model) {
 
     log.info("Controller calling acceptPaymentSubscribeToMailChimpAndRegisterFamily");
+    
+    family.setStripeReceiptNumber(tokenId);
 
     try {
       doEverything.acceptPaymentSubscribeToMailChimpAndRegisterFamily(family);
@@ -60,15 +62,55 @@ public class RegistrationController {
     return doEverything.calculateTotalCharge(townCode, adultCount, childCount);
   }
 
+  @GetMapping(path = "/stripe/payment/{townCode}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String stripeSimpleCheckout(@PathVariable String townCode, @PathVariable int adultCount,
+      @PathVariable int childCount, Model model) {
+
+    BigDecimal amount = doEverything.calculateTotalCharge(townCode, adultCount, childCount);
+
+    // convert to cents
+    amount = amount.multiply(new BigDecimal("100"));
+
+    // String response = " <form action=\"/your-charge-code\" method=\"POST\">"
+    // + "<script src=\"https://checkout.stripe.com/checkout.js\"
+    // type=\"text/javascript\" class=\"stripe-button\"
+    // data-key=\"pk_test_8nOh4pljYTX09ZXSIAB9FB1o\" "
+    // + " data-amount=\"" + amount + "\"" + " data-name=\"GRIC Diwali - 2016\"
+    // "
+    // + " data-description=\"Payment for the Diwali party\" " + "
+    // data-image=\"static/images/diya.png\" "
+    // + " data-billing-address=\"true\" "
+    // + " data-locale=\"auto\"></script><script
+    // type=\"text/javascript\">alert(\"appended\");</script></form>";
+    //
+    String response = " Kya Bakwaaas hai " + amount;
+
+    return response;
+  }
+
   /**
    * Testing in browser.
    * 
    * @param model
    * @return
    */
-  @GetMapping(path = "/register/hello")
-  public String showHello(Model model) {
-    return "Hello Test REST Registration";
+  @GetMapping(path = "/register/hello/{townCode}/{adultCount}/{childCount}")
+  public String showHello(@PathVariable String townCode, @PathVariable int adultCount,
+      @PathVariable int childCount, Model model) {
+
+    BigDecimal amount = doEverything.calculateTotalCharge(townCode, adultCount, childCount);
+
+    // convert to cents
+    amount = amount.multiply(new BigDecimal("100"));
+
+    String response = " <form action=\"/your-charge-code\" method=\"POST\">"
+        + "<script src=\"https://checkout.stripe.com/checkout.js\" type=\"text/javascript\" class=\"stripe-button\" data-key=\"pk_test_8nOh4pljYTX09ZXSIAB9FB1o\" "
+        + " data-amount=\"" + amount + "\"" + " data-name=\"GRIC Diwali - 2016\" "
+        + " data-description=\"Payment for the Diwali party\" " + " data-image=\"static/images/diya.png\" "
+        + " data-billing-address=\"true\" "
+        + " data-locale=\"auto\"></script><script type=\"text/javascript\">alert(\"appended\");</script></form>";
+
+    return response;
   }
 
 }

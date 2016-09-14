@@ -148,7 +148,9 @@
               class="numBox"></td>
           </tr>
           <tr>
-            <td align="center" colspan="3">&nbsp;</td>
+            <td align="center" colspan="3">
+              &nbsp;
+            </td>
           </tr>
         </table>
       </div>
@@ -158,7 +160,8 @@
           <tr>
             <td align="left">
               <p>&nbsp;</p>
-              <h1 id="totalCharge"></h1>
+              <h1>Total charge for the event: $<span id="totalCharge"></span></h1>
+              
               <ul>
                 <li>Click on the "Pay Now" button below</li>
                 <li>Pay by credit or debit card.</li>
@@ -169,64 +172,37 @@
           </tr>
           <tr>
             <td align="center">
-              <button id="customButton" class="stripe-button">Purchase Ticket</button> <script type="text/javascript">
-															var handler = StripeCheckout
-																	.configure({
-																		key : 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-																		image : 'static/images/diya.png',
-																		locale : 'auto',
-																		panelLabel: 'Pay {{amount}}',
-																		email: $('#primaryEmail').val(),
-																		amount : $(
-																				'#totalCharge')
-																				.val() * 100,
-																		token : function(
-																				token) {
-																			alert($(
-																					'#totalCharge')
-																					.val() * 100);
-																			// You can access the token ID with `token.id`.
-																			// Get the token ID to your server-side code for use.
-																		}
-																	});
-
-															document
-																	.getElementById(
-																			'customButton')
-																	.addEventListener(
-																			'click',
-																			function(
-																					e) {
-																				// Open Checkout with further options:
-																				handler
-																						.open({
-																							name : 'GRIC Diwali - 2016',
-																							description : 'Diwali Dhamaka!',
-																							zipCode : true,
-					                                    email: $('#primaryEmail').val(),
-																							amount : $(
-																									'#totalCharge')
-																									.val() * 100
-																						});
-																				e
-																						.preventDefault();
-																			});
-
-															// Close Checkout on page navigation:
-															window
-																	.addEventListener(
-																			'popstate',
-																			function() {
-																				handler
-																						.close();
-																			});
-														</script> <!--               <form action="/your-charge-code" method="POST">
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="pk_test_8nOh4pljYTX09ZXSIAB9FB1o" data-amount="2000" data-name="GRIC Diwali - 2016"
-                  data-description="Payment for the Diwali party" data-image="/img/documentation/checkout/marketplace.png"
-                  data-billing-address="true" data-email="Preload from previous screen" data-locale="auto"></script>
-              </form>
- -->
+              <button id="customButton">Purchase</button>
+              <script>
+              var handler = StripeCheckout.configure({
+                key: "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
+                image: "static/images/diya.png",
+                locale: "auto",
+                token: function(token) {
+                  // You can access the token ID with `token.id`.
+                  // Get the token ID to your server-side code for use.
+                    $("stripeReceiptNumber").val(token.id);
+                  submitPageForm(token.id);
+                }
+              });
+              
+              document.getElementById('customButton').addEventListener('click', function(e) {
+                // Open Checkout with further options:
+                handler.open({
+                  name: 'GRIC Diwali - 2016',
+                  description: 'Diwali Dhamaka Registration Payment',
+                  zipCode: true,
+                  amount: 3000
+                });
+                e.preventDefault();
+              });
+              
+              // Close Checkout on page navigation:
+              window.addEventListener('popstate', function() {
+                handler.close();
+              });
+              </script>
+              <input type="text" name="stripeReceiptNumber" id="stripeReceiptNumber" value="" />
             </td>
           </tr>
         </table>

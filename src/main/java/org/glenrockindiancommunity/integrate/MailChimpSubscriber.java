@@ -2,12 +2,12 @@ package org.glenrockindiancommunity.integrate;
 
 public class MailChimpSubscriber {
 
-  private MergeFields mergeFields;
+  private MergeFields merge_fields;
   private String emailAddress;
   private String status = "subscribed";
 
   public MailChimpSubscriber(String fname, String lname, String emailAddress) {
-    this.mergeFields = new MergeFields(fname, lname);
+    this.merge_fields = new MergeFields(fname, lname);
     this.emailAddress = emailAddress;
   }
 
@@ -20,41 +20,41 @@ public class MailChimpSubscriber {
   }
 
   public String getLname() {
-    return mergeFields.getLname();
+    return merge_fields.getLNAME();
   }
 
   public String getFname() {
-    return mergeFields.getFname();
+    return merge_fields.getFNAME();
   }
 
   private class MergeFields {
-    private String fname;
-    private String lname;
+    private String FNAME;
+    private String LNAME;
 
-    public MergeFields(String fname, String lname) {
-      this.fname = fname;
-      this.lname = lname;
+    public MergeFields(String fNAME, String lNAME) {
+      FNAME = fNAME;
+      LNAME = lNAME;
     }
 
-    public String getFname() {
-      return fname;
+    public String getFNAME() {
+      return FNAME;
     }
 
-    public String getLname() {
-      return lname;
+    public String getLNAME() {
+      return LNAME;
     }
 
     @Override
     public String toString() {
-      return "MergeFields [fname=" + fname + ", lname=" + lname + "]";
+      return "MergeFields [FNAME=" + FNAME + ", LNAME=" + LNAME + "]";
     }
 
   }
 
   @Override
   public String toString() {
-    return "MailChimpSubscriber [mergeFields=" + mergeFields.toString() + ", emailAddress=" + emailAddress + ", status="
-        + status + "]";
+    return "MailChimpSubscriber [mergeFields=" + merge_fields.toString() + ", emailAddress=" + emailAddress
+        + ", status=" + status + "]";
   }
 
 }

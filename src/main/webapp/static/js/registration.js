@@ -6,7 +6,7 @@ $(document).ready(
 				transitionEffect : 'slideLeft',
 				enableAllSteps : false,
 				keyNavigation : false, // Enable/Disable key navigation(left
-										// and right keys are used if enabled)
+				// and right keys are used if enabled)
 				hideButtonsOnDisabled : true,
 				onLeaveStep : leaveAStepCallback,
 				onShowStep : showStepCallback,
@@ -16,47 +16,64 @@ $(document).ready(
 
 			function leaveAStepCallback(obj) {
 				var step_num = obj.attr('rel');
+				if (step_num == 2) {
+					var town = $('#town').val();
+					var adults = $('#adults').val();
+					var children = $('#children').val();
+					var url = "/register/calculatetotal/" + town + "/" + adults
+							+ "/" + children;
+					$.get(url, function(data, status) {
+						$('#totalCharge').text(data);
+					});
+				}
 				return validateSteps(step_num);
 			}
 
 			function showStepCallback(obj) {
 				var step = obj.attr('rel');
-				var town = $('#town').val();
-				var adults = $('#adults').val();
-				var children = $('#children').val();
-				var url = "/register/calculatetotal/" + town + "/" + adults
-						+ "/" + children;
-				if (step == 3) {
+				if (step == 10) {
+					var town = $('#town').val();
+					var adults = $('#adults').val();
+					var children = $('#children').val();
+					var url = "/register/calculatetotal/" + town + "/" + adults
+					+ "/" + children;
 					$.get(url, function(data, status) {
-						$('#totalCharge').text(
-								'Total charge for the event: $' + data);
+					    var response = " <form action=\"/your-charge-code\" method=\"POST\">"
+					        + "<script src=\"https://checkout.stripe.com/checkout.js\" type=\"text/javascript\" class=\"stripe-button\" data-key=\"pk_test_8nOh4pljYTX09ZXSIAB9FB1o\" "
+					        + " data-amount=\"" + data + "\"" + " data-name=\"GRIC Diwali - 2016\" "
+					        + " data-description=\"Payment for the Diwali party\" " + " data-image=\"static/images/diya.png\" "
+					        + " data-billing-address=\"true\" "
+					        + " data-locale=\"auto\"></script><script type=\"text/javascript\">alert(\"appended\");</script></form>";
+					    alert(response);
+						$('#stripeButtonForm').append(data);
 					});
 				}
+
 			}
 
 			function onFinishCallback() {
 				if (validateAllSteps()) {
-					// $('form').submit();
-					var form = document.getElementById("mainForm");
-					// stop the regular form submission
-					// collect the form data while iterating over the inputs
-					var data = {};
-					for (var i = 0, ii = form.length; i < ii; ++i) {
-						var input = form[i];
-						if (input.name) {
-							data[input.name] = input.value;
-						}
-					}
-					addData(data);
+					return true;
 				}
 			}
 		});
 
-function addData(dataIn) {
+function submitPageForm(token) {
+	var form = document.getElementById("mainForm");
+	// stop the regular form submission
+	// collect the form data while iterating over the inputs
+	var data = {};
+	for (var i = 0, ii = form.length; i < ii; ++i) {
+		var input = form[i];
+		if (input.name) {
+			data[input.name] = input.value;
+		}
+	}
+	
 	$.ajax({
 		type : "POST",
-		url : "/register/family",
-		data : JSON.stringify(dataIn),
+		url : "/register/family/" + token,
+		data : JSON.stringify(data),
 		contentType : "application/json; charset=utf-8",
 		crossDomain : false,
 		dataType : "json",

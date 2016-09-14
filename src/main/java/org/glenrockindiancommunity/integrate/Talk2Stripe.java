@@ -25,7 +25,7 @@ public class Talk2Stripe {
   // Set your secret key: remember to change this to your live secret
   // key in production
   @Value("${stripe.api.key}")
-  private String stripeApiKey = "sk_test_BQokikJOvBiI2HlWgH4olfQ2";
+  private String stripeApiKey = "pk_test_8nOh4pljYTX09ZXSIAB9FB1o";
 
   /**
    * * The checkout form only makes a token, the final charge happens using this

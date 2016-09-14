@@ -53,14 +53,14 @@ public class DoEverything {
     try {
 
       BigDecimal recalculatedAmount = calculateTotalCharge(family.getTown(), family.getAdults(), family.getChildren());
-      
+
       family.setAmount(recalculatedAmount);
 
       // once the
       log.info("Calling Stripe to charge...");
 
-      String stripeReceiptNumber = "RANDOM-STRING";
-          // talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(), family.getStripeReceiptNumber());
+      String stripeReceiptNumber = talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(),
+          family.getStripeReceiptNumber());
 
       // reset it, as token id is just a temporary variable for it.
       family.setStripeReceiptNumber(stripeReceiptNumber);
@@ -70,7 +70,8 @@ public class DoEverything {
       repository.save(family);
 
     } catch (Exception e) {
-      throw new RuntimeException(e.getMessage() +  "There was an error processing your payment. Please get in touch with the organizers");
+      throw new RuntimeException(
+          e.getMessage() + "There was an error processing your payment. Please get in touch with the organizers");
     }
 
     log.info("Subscribing to mailchimp...");
