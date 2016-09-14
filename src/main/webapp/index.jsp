@@ -97,6 +97,7 @@
                 <li>Ages 12+ - $40</li>
               </ul>
 
+              <p>All transaction will be charged 2.9% transaction fee + 30 cents for every successful transaction.</p>
               <p>All non-residents of Glen Rock will be charged an extra 10% of the total.</p>
               <h2 class="StepTitle">Fill the form</h2>
             </td>
@@ -138,7 +139,7 @@
             <td align="left"><span id="msg_adults"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Children<span class="required">*</span> :
+            <td align="right">Children (Ages 5 - 11)<span class="required">*</span> :
             </td>
             <td align="left"><input type="text" id="children" name="children" value="0" class="numBox"></td>
             <td align="left"><span id="msg_children"></span>&nbsp;</td>

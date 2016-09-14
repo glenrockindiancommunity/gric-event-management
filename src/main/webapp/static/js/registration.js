@@ -167,18 +167,18 @@ function validateStep2() {
 
 	// validate adults
 	var adults = $('#adults').val();
-	if (!adults && adults.length <= 0 && (adults + 0) < 1) {
+	if (!adults && (adults.length <= 0 || (adults + 0) < 1)) {
 		isValid = false;
-		$('#msg_adults').html('Please provide a valid adult count').show();
+		$('#msg_adults').html('Please provide a valid number of adults attending the event').show();
 	} else {
 		$('#msg_adults').html('').hide();
 	}
 
 	// validate children
 	var children = $('#children').val();
-	if (!children && children.length <= 0 && children < 0) {
+	if (!children && (children.length <= 0 || (children + 0) < 0)) {
 		isValid = false;
-		$('#msg_children').html('Please provide a valid children count').show();
+		$('#msg_children').html('Please provide a valid number of children attending the event').show();
 	} else {
 		$('#msg_children').html('').hide();
 	}

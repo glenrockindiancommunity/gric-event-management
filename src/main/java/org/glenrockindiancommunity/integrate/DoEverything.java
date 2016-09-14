@@ -59,11 +59,10 @@ public class DoEverything {
       // once the
       log.info("Calling Stripe to charge...");
 
-      String stripeReceiptNumber = talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(),
-          family.getStripeReceiptNumber());
-
       // reset it, as token id is just a temporary variable for it.
-      family.setStripeReceiptNumber(stripeReceiptNumber);
+      family.setStripeReceiptNumber(talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(),
+          family.getStripeReceiptNumber()));
+
 
       log.info("Saving family info to DB...");
       // Now that payment was successful, now save everything to database.
