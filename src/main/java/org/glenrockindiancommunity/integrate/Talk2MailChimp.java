@@ -26,6 +26,7 @@ import org.springframework.web.client.AsyncRestTemplate;
  * @author vmehta
  *
  */
+@Component
 public class Talk2MailChimp {
 
   private static final Logger log = LoggerFactory.getLogger(Talk2MailChimp.class);
