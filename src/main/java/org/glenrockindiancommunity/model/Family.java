@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Family {
@@ -15,23 +14,14 @@ public class Family {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private String id;
-  @NotNull
   private String familyNameCode;
-  @NotNull
   private String lastname;
-  @NotNull
   private String firstname;
-  @NotNull
   private String town;
-  @NotNull
   private Integer adults;
-  @NotNull
   private Integer children;
-  @NotNull
   private BigDecimal amount;
-  @NotNull
   private String primaryEmail;
-  @NotNull
   private String stripeReceiptNumber;
   private boolean participant;
   private boolean volunteer;
