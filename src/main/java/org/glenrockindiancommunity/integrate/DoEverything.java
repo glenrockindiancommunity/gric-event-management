@@ -1,6 +1,7 @@
 package org.glenrockindiancommunity.integrate;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.glenrockindiancommunity.model.Family;
 import org.glenrockindiancommunity.respository.FamilyRepository;
@@ -139,6 +140,10 @@ public class DoEverything {
     pCharge = pCharge.divide(fPercent, 2, BigDecimal.ROUND_CEILING);
 
     return pCharge;
+  }
+  
+  public List<Family> showAll() {
+    return repository.findAll();
   }
 
 }

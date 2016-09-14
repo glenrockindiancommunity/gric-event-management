@@ -1,5 +1,7 @@
 package org.glenrockindiancommunity.respository;
 
+import java.util.List;
+
 import org.glenrockindiancommunity.model.Family;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +19,7 @@ public interface FamilyRepository extends PagingAndSortingRepository<Family, Str
   Family findByFamilyNameCode(String familyNameCode);
 
   public Page<Family> findAll(Pageable pageable);
-  
-  
+
+  public List<Family> findAll();
 
 }

@@ -1,6 +1,7 @@
 package org.glenrockindiancommunity.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.glenrockindiancommunity.integrate.DoEverything;
 import org.glenrockindiancommunity.model.Family;
@@ -61,6 +62,11 @@ public class RegistrationController {
       @PathVariable int childCount, Model model) {
     log.info("Calculating cost...");
     return doEverything.calculateTotalCharge(townCode, adultCount, childCount);
+  }
+  
+  @GetMapping(path="/register/showall", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public List<Family> showAllRegisteredUsers(Model model) {
+    return doEverything.showAll();
   }
 
 }
