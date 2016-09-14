@@ -5,7 +5,8 @@ $(document).ready(
 				/* contentURL: '/register/family', */
 				transitionEffect : 'slideLeft',
 				enableAllSteps : false,
-				keyNavigation : false, // Enable/Disable key navigation(left
+				keyNavigation : false, // Enable/Disable key
+				// navigation(left
 				// and right keys are used if enabled)
 				hideButtonsOnDisabled : true,
 				onLeaveStep : leaveAStepCallback,
@@ -31,24 +32,6 @@ $(document).ready(
 
 			function showStepCallback(obj) {
 				var step = obj.attr('rel');
-				if (step == 10) {
-					var town = $('#town').val();
-					var adults = $('#adults').val();
-					var children = $('#children').val();
-					var url = "/register/calculatetotal/" + town + "/" + adults
-					+ "/" + children;
-					$.get(url, function(data, status) {
-					    var response = " <form action=\"/your-charge-code\" method=\"POST\">"
-					        + "<script src=\"https://checkout.stripe.com/checkout.js\" type=\"text/javascript\" class=\"stripe-button\" data-key=\"pk_test_8nOh4pljYTX09ZXSIAB9FB1o\" "
-					        + " data-amount=\"" + data + "\"" + " data-name=\"GRIC Diwali - 2016\" "
-					        + " data-description=\"Payment for the Diwali party\" " + " data-image=\"static/images/diya.png\" "
-					        + " data-billing-address=\"true\" "
-					        + " data-locale=\"auto\"></script><script type=\"text/javascript\">alert(\"appended\");</script></form>";
-					    alert(response);
-						$('#stripeButtonForm').append(data);
-					});
-				}
-
 			}
 
 			function onFinishCallback() {
@@ -69,7 +52,7 @@ function submitPageForm(token) {
 			data[input.name] = input.value;
 		}
 	}
-	
+
 	$.ajax({
 		type : "POST",
 		url : "/register/family/" + token,
@@ -78,13 +61,14 @@ function submitPageForm(token) {
 		crossDomain : false,
 		dataType : "json",
 		success : function(data, status, jqXHR) {
-			alert(success);
+			$("#confirmationMessage").append(data);
+			$('#wizard').smartWizard('goForward');
 		},
 
 		error : function(jqXHR, status) {
 			// error handler
-			console.log(jqXHR);
-			alert('fail' + status.code);
+			$("#confirmationMessage").append(jqXHR.responseText);
+			$('#wizard').smartWizard('goForward');
 		}
 	});
 }

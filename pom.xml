@@ -10,8 +10,6 @@
 
 	<properties>
 		<spring.boot.version>1.4.0.RELEASE</spring.boot.version>
-		<aws.java.sdk.version>1.11.15</aws.java.sdk.version>
-		<spring.data.dynamodb.version>4.4.1</spring.data.dynamodb.version>
 		<stripe.java.version>2.8.0</stripe.java.version>
 		<java.version>1.8</java.version>
 	</properties>
@@ -34,16 +32,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-dynamodb</artifactId>
-			<version>${aws.java.sdk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.derjust</groupId>
-			<artifactId>spring-data-dynamodb</artifactId>
-			<version>${spring.data.dynamodb.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -51,12 +39,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>com.amazonaws</groupId> <artifactId>DynamoDBLocal</artifactId> 
-			<version>1.11.0.1</version> <scope>test</scope> </dependency> -->
 		<dependency>
 			<groupId>com.stripe</groupId>
 			<artifactId>stripe-java</artifactId>
 			<version>${stripe.java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

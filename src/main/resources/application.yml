@@ -1,0 +1,11 @@
+#spring:
+#    datasource:
+#        hikari:
+#            connection-test-query: SELECT 1 FROM DUAL
+#            minimum-idle: 1
+#            maximum-pool-size: 5
+#        driver-class-name: com.mysql.jdbc.Driver
+#        url: postgres://bobfoopwcqjgnh:vBKeDQ9XG6_kD4qGZXxhJ-CfpU@ec2-54-235-102-235.compute-1.amazonaws.com:5432/dfq5hbd1f8eqi
+#        username: bobfoopwcqjgnh
+#        password: vBKeDQ9XG6_kD4qGZXxhJ-CfpU
+#        type: com.zaxxer.hikari.HikariDataSource

@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 @Component
 public class DoEverything {
@@ -46,7 +45,7 @@ public class DoEverything {
    * 
    * @param family
    */
-  public void acceptPaymentSubscribeToMailChimpAndRegisterFamily(Family family) {
+  public Family acceptPaymentSubscribeToMailChimpAndRegisterFamily(Family family) {
 
     log.info("Accepting payment for family " + family.toString());
 
@@ -74,11 +73,13 @@ public class DoEverything {
           e.getMessage() + "There was an error processing your payment. Please get in touch with the organizers");
     }
 
-    log.info("Subscribing to mailchimp...");
+    // log.info("Subscribing to mailchimp...");
     // This has to be Async and non-dependent on the tx, if it fails, we'll
     // revist as to why later
-    talk2MailChimp.addSubscriber(family.getFirstname(), family.getLastname(), family.getPrimaryEmail());
+    // talk2MailChimp.addSubscriber(family.getFirstname(), family.getLastname(),
+    // family.getPrimaryEmail());
 
+    return family;
   }
 
   /**

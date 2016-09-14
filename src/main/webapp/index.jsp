@@ -54,7 +54,6 @@
               <h2 align="center">
                 7:00 PM - 11:00 PM<br />Saturday, October 22, 2016
               </h2>
-
             </td>
           </tr>
           <tr>
@@ -63,17 +62,29 @@
           <tr>
             <td align="left" colspan="3">
               <p align="center">
-                <b>The Excelsior, <br />190 US-46, Saddle Brook, NJ 07663 <br /> <br />
-                </b>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.20469942012!2d-74.099133584143!3d40.88932443468427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f96256082115%3A0x3b90c1b864be0f25!2sThe+Excelsior+Catering!5e0!3m2!1sen!2sus!4v1473460458353"
                   width="600" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>
               </p>
-              <p>&nbsp;</p>
+              <h2 align="center">
+                The Excelsior, <br />190 US-46, Saddle Brook, NJ 07663 <br /> <br />
+              </h2>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="step-2">
+        <h2 class="StepTitle">Step 2: Family Details</h2>
+        <table cellpadding="3" cellspacing="3">
+          <tr>
+            <td align="center" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="3" align="left">
               <h3>Please note</h3>
               <ol>
-                <li>The event will accommodate first 125 people who register</li>
-                <li>Registration closes October 2nd</li>
+                <li>The event will accommodate first 200 people who register</li>
+                <li>Registration closes October 10th</li>
                 <li>For volunteering OR if interested to perform, please update the form accordingly, and someone will
                   get in touch with you ASAP</li>
               </ol>
@@ -85,15 +96,10 @@
                 <li>Ages 5 - 11 - $20</li>
                 <li>Ages 12+ - $40</li>
               </ul>
+
+              <p>All non-residents of Glen Rock will be charged an extra 10% of the total.</p>
+              <h2 class="StepTitle">Fill the form</h2>
             </td>
-          </tr>
-        </table>
-      </div>
-      <div id="step-2">
-        <h2 class="StepTitle">Step 2: Family Details</h2>
-        <table>
-          <tr>
-            <td align="center" colspan="3">&nbsp;</td>
           </tr>
           <tr>
             <td align="right">Last Name<span class="required">*</span> :
@@ -148,9 +154,7 @@
               class="numBox"></td>
           </tr>
           <tr>
-            <td align="center" colspan="3">
-              &nbsp;
-            </td>
+            <td align="center" colspan="3">&nbsp;</td>
           </tr>
         </table>
       </div>
@@ -160,8 +164,10 @@
           <tr>
             <td align="left">
               <p>&nbsp;</p>
-              <h1>Total charge for the event: $<span id="totalCharge"></span></h1>
-              
+              <h1>
+                Total charge for the event: $<span id="totalCharge"></span>
+              </h1>
+
               <ul>
                 <li>Click on the "Pay Now" button below</li>
                 <li>Pay by credit or debit card.</li>
@@ -172,37 +178,51 @@
           </tr>
           <tr>
             <td align="center">
-              <button id="customButton">Purchase</button>
-              <script>
-              var handler = StripeCheckout.configure({
-                key: "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
-                image: "static/images/diya.png",
-                locale: "auto",
-                token: function(token) {
-                  // You can access the token ID with `token.id`.
-                  // Get the token ID to your server-side code for use.
-                    $("stripeReceiptNumber").val(token.id);
-                  submitPageForm(token.id);
-                }
-              });
-              
-              document.getElementById('customButton').addEventListener('click', function(e) {
-                // Open Checkout with further options:
-                handler.open({
-                  name: 'GRIC Diwali - 2016',
-                  description: 'Diwali Dhamaka Registration Payment',
-                  zipCode: true,
-                  amount: 3000
-                });
-                e.preventDefault();
-              });
-              
-              // Close Checkout on page navigation:
-              window.addEventListener('popstate', function() {
-                handler.close();
-              });
-              </script>
-              <input type="text" name="stripeReceiptNumber" id="stripeReceiptNumber" value="" />
+              <button id="customButton" class="payNow">Purchase Tickets!</button> <script>
+															var handler = StripeCheckout
+																	.configure({
+																		key : "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
+																		image : "static/images/diya.png",
+																		locale : "auto",
+																		token : function(
+																				token) {
+																			// You can access the token ID with `token.id`.
+																			// Get the token ID to your server-side code for use.
+																			$(
+																					"stripeReceiptNumber")
+																					.val(
+																							token.id);
+																			submitPageForm(token.id);
+																		}
+																	});
+
+															document
+																	.getElementById(
+																			'customButton')
+																	.addEventListener(
+																			'click',
+																			function(
+																					e) {
+																				// Open Checkout with further options:
+																				handler
+																						.open({
+																							name : 'GRIC Diwali - 2016',
+																							description : 'Diwali Dhamaka Registration Payment',
+																							zipCode : true
+																						});
+																				e
+																						.preventDefault();
+																			});
+
+															// Close Checkout on page navigation:
+															window
+																	.addEventListener(
+																			'popstate',
+																			function() {
+																				handler
+																						.close();
+																			});
+														</script>
             </td>
           </tr>
         </table>
@@ -215,14 +235,9 @@
           </tr>
           <tr>
             <td align="left">
-              <p>
-                Thank you for your registration. Your identification code for the event is: <b>registration_id</b>
-              </p>
-              <p>
-                Your payment confirmation number is: <b>payment_confirmation_id</b>
-              </p>
-              <p>Please make a copy of these for your reference. You'll receive an email from us confirming your booking
-                and updates about the event as it gets closer.</p>
+              <p id="confirmationMessage">&nbsp;</p>
+              <p>Please make a copy of this page for your reference. You'll receive an email confirming your booking and
+                updates about the event as it gets closer.</p>
             </td>
           </tr>
         </table>
