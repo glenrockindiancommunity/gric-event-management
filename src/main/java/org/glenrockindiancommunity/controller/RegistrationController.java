@@ -44,8 +44,9 @@ public class RegistrationController {
       log.error("Error submitting form " + e.getMessage());
       return "There was an error submitting your request " + e.getMessage() + "\n\n";
     }
-    return "See you soon at the Diwali Party!. Your event confirmation id is  <b>" + family.getFamilyNameCode()
-        + "</b> and your payment confirmation id is <b>" + family.getStripeReceiptNumber() + "</b>";
+    return "<p>See you soon at the Diwali Party!. </p> <p>Your card has been charged <b>$" + family.getAmount() + "</b> for the event </p> <p>Your event confirmation id is  <b>"
+        + family.getFamilyNameCode() + "</b> and your payment confirmation id is <b>" + family.getStripeReceiptNumber()
+        + "</b>. </p>";
   }
 
   /**

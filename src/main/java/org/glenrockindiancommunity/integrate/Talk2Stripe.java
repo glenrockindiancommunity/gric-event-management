@@ -43,9 +43,10 @@ public class Talk2Stripe {
    * @throws InvalidRequestException
    * @throws APIConnectionException
    * @throws APIException
+   * @throws CardException
    */
   public String createCharge(String email, BigDecimal amount, String token)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException, CardException {
 
     log.warn("Charging: " + email + " For: " + amount);
 
@@ -56,7 +57,8 @@ public class Talk2Stripe {
 
       // Create a charge: this will charge the user's card
       Map<String, Object> chargeParams = new HashMap<String, Object>();
-      chargeParams.put("amount", amountInCents(amount)); // Amount in cents
+      // Amount in cents, multiple by 100, and send it as integer for API.
+      chargeParams.put("amount", amount.multiply(new BigDecimal("100")).intValueExact());
       chargeParams.put("currency", "usd");
       chargeParams.put("source", token);
       chargeParams.put("description", "Glen Rock Indian Diwali Dhamaka - 2016");
@@ -68,15 +70,11 @@ public class Talk2Stripe {
       String chargeIdAndReceiptNumber = charge.getId() + "," + charge.getReceiptNumber();
 
       return chargeIdAndReceiptNumber;
-    } catch (CardException e) {
+    } catch (Exception e) {
       // The card has been declined
       log.error("Charge failed for: " + email + " For: " + amount);
+      throw e;
     }
-    return null;
-  }
-
-  private Integer amountInCents(BigDecimal amount) {
-    return (amount.intValue() * 100);
   }
 
 }

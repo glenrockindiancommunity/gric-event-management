@@ -97,7 +97,9 @@
                 <li>Ages 12+ - $40</li>
               </ul>
 
-              <p>All transaction will be charged <b>2.9% transaction fee + 30¢</b> for every successful transaction.</p>
+              <p>
+                All transaction will be charged <b>2.9% transaction fee + 30¢</b> for every successful transaction.
+              </p>
               <h2 class="StepTitle">Fill the form</h2>
             </td>
           </tr>
@@ -237,6 +239,7 @@
             <td align="left">
               <p id="confirmationMessage">&nbsp;</p>
               <p>Please make a copy of this page for your reference. See you at the party!</p>
+              <p>You should also be receiving an email from Stripe.com with the details of the charge.</p>
 
               <p>&nbsp;</p>
               <h2 align="center">
