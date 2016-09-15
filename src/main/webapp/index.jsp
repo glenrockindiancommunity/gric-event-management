@@ -145,12 +145,12 @@
             <td align="left"><span id="msg_children"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Participate :</td>
+            <td align="right">Participate in cultural program :</td>
             <td align="left" colspan="2"><input type="checkbox" id="participant" name="participant" value="true"
               class="numBox"></td>
           </tr>
           <tr>
-            <td align="right">Volunteer :</td>
+            <td align="right">Volunteer for the event :</td>
             <td align="left" colspan="2"><input type="checkbox" id="volunteer" name="volunteer" value="true"
               class="numBox"></td>
           </tr>
@@ -237,8 +237,15 @@
           <tr>
             <td align="left">
               <p id="confirmationMessage">&nbsp;</p>
-              <p>Please make a copy of this page for your reference. You'll receive an email confirming your booking and
-                updates about the event as it gets closer.</p>
+              <p>Please make a copy of this page for your reference. See you at the party!</p>
+
+              <p>&nbsp;</p>
+              <h2 align="center">
+                The Excelsior, <br />190 US-46, Saddle Brook, NJ 07663 <br /> <br />
+              </h2>
+              <h2 align="center">
+                7:00 PM - 11:00 PM<br />Saturday, October 22, 2016
+              </h2>
             </td>
           </tr>
         </table>

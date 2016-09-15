@@ -17,6 +17,7 @@ $(document).ready(
 
 			function leaveAStepCallback(obj) {
 				var step_num = obj.attr('rel');
+				$('.buttonFinish').hide();
 				if (step_num == 2) {
 					var town = $('#town').val();
 					var adults = $('#adults').val();
@@ -32,6 +33,15 @@ $(document).ready(
 
 			function showStepCallback(obj) {
 				var step = obj.attr('rel');
+				if (step == 3) {
+					$('.buttonNext').hide();
+				}
+				if (step == 4) {
+					$('.buttonNext').hide();
+					$('.buttonPrevious').hide();
+					$('buttonFinish').hide();
+				}
+
 			}
 
 			function onFinishCallback() {
@@ -61,13 +71,13 @@ function submitPageForm(token) {
 		crossDomain : false,
 		dataType : "json",
 		success : function(data, status, jqXHR) {
-			$("#confirmationMessage").append(data);
+			$("#confirmationMessage").html(data);
 			$('#wizard').smartWizard('goForward');
 		},
 
 		error : function(jqXHR, status) {
 			// error handler
-			$("#confirmationMessage").append(jqXHR.responseText);
+			$("#confirmationMessage").html(jqXHR.responseText);
 			$('#wizard').smartWizard('goForward');
 		}
 	});
@@ -169,7 +179,9 @@ function validateStep2() {
 	var adults = $('#adults').val();
 	if (!adults && (adults.length <= 0 || (adults + 0) < 1)) {
 		isValid = false;
-		$('#msg_adults').html('Please provide a valid number of adults attending the event').show();
+		$('#msg_adults').html(
+				'Please provide a valid number of adults attending the event')
+				.show();
 	} else {
 		$('#msg_adults').html('').hide();
 	}
@@ -178,7 +190,10 @@ function validateStep2() {
 	var children = $('#children').val();
 	if (!children && (children.length <= 0 || (children + 0) < 0)) {
 		isValid = false;
-		$('#msg_children').html('Please provide a valid number of children attending the event').show();
+		$('#msg_children')
+				.html(
+						'Please provide a valid number of children attending the event')
+				.show();
 	} else {
 		$('#msg_children').html('').hide();
 	}
