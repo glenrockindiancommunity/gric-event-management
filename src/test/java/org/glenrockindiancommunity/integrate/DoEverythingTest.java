@@ -25,7 +25,6 @@ public class DoEverythingTest {
     BigDecimal expectedTotalCharge = new BigDecimal("103.30");
 
     BigDecimal totalCharge = doEverything.calculateTotalCharge(townCode, adultCount, childCount);
-    System.out.println(totalCharge);
 
     Assert.assertEquals(expectedTotalCharge, totalCharge);
   }
@@ -39,7 +38,6 @@ public class DoEverythingTest {
     BigDecimal expectedTotalCharge = new BigDecimal("113.60");
 
     BigDecimal totalCharge = doEverything.calculateTotalCharge(townCode, adultCount, childCount);
-    System.out.println(totalCharge);
 
     Assert.assertEquals(expectedTotalCharge, totalCharge);
   }

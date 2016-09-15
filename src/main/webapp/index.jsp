@@ -97,8 +97,7 @@
                 <li>Ages 12+ - $40</li>
               </ul>
 
-              <p>All transaction will be charged 2.9% transaction fee + 30 cents for every successful transaction.</p>
-              <p>All non-residents of Glen Rock will be charged an extra 10% of the total.</p>
+              <p>All transaction will be charged <b>2.9% transaction fee + 30¢</b> for every successful transaction.</p>
               <h2 class="StepTitle">Fill the form</h2>
             </td>
           </tr>
@@ -182,7 +181,7 @@
               <button id="customButton" class="payNow">Purchase Tickets!</button> <script>
 															var handler = StripeCheckout
 																	.configure({
-																		key : "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
+																		key : "pk_live_KsVk9skQH8fAb1T50X5MCFXU",
 																		image : "static/images/diya.png",
 																		locale : "auto",
 																		token : function(
