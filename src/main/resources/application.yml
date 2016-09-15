@@ -1,9 +1,0 @@
-spring.datasource.url: jdbc:h2:mem:diwalidb;DB_CLOSE_ON_EXIT=FALSE
-
-#spring:
-#    datasource:
-#        hikari:
-#            minimum-idle: 1
-#            maximum-pool-size: 5
-#        url: ${POSTGRES_URL}
-#        type: com.zaxxer.hikari.HikariDataSource
