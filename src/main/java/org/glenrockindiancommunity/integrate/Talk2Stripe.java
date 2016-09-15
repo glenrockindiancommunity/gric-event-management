@@ -56,8 +56,7 @@ public class Talk2Stripe {
 
       // Create a charge: this will charge the user's card
       Map<String, Object> chargeParams = new HashMap<String, Object>();
-//      chargeParams.put("amount", amountInCents(amount)); // Amount in cents
-      chargeParams.put("amount", amountInCents(new BigDecimal("1"))); // Amount in cents
+      chargeParams.put("amount", amountInCents(amount)); // Amount in cents
       chargeParams.put("currency", "usd");
       chargeParams.put("source", token);
       chargeParams.put("description", "Glen Rock Indian Diwali Dhamaka - 2016");
