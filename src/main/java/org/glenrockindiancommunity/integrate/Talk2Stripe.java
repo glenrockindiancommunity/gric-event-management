@@ -4,9 +4,10 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.glenrockindiancommunity.GricConfigProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.stripe.Stripe;
@@ -22,10 +23,8 @@ public class Talk2Stripe {
 
   private static final Logger log = LoggerFactory.getLogger(Talk2Stripe.class);
 
-  // Set your secret key: remember to change this to your live secret
-  // key in production
-  @Value("${stripe.api.key}")
-  private String stripeApiKey = "pk_test_8nOh4pljYTX09ZXSIAB9FB1o";
+  @Autowired
+  private GricConfigProperties gricConfigProperties;
 
   /**
    * * The checkout form only makes a token, the final charge happens using this
@@ -53,7 +52,7 @@ public class Talk2Stripe {
     try {
 
       // See your keys here: https://dashboard.stripe.com/account/apikeys
-      Stripe.apiKey = stripeApiKey;
+      Stripe.apiKey = gricConfigProperties.getStripeApiKey();
 
       // Create a charge: this will charge the user's card
       Map<String, Object> chargeParams = new HashMap<String, Object>();

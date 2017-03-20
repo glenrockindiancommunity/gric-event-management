@@ -2,23 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.glenrockindiancommunity</groupId>
-	<artifactId>diwali</artifactId>
+	<artifactId>gric-event</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Diwali Maven Webapp</name>
+	<name>GRIC Indian Community Event Registation</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<spring.boot.version>1.4.0.RELEASE</spring.boot.version>
-		<stripe.java.version>2.8.0</stripe.java.version>
-		<sendgrid.version>3.0.9</sendgrid.version>
+		<spring.boot.version>1.5.2.RELEASE</spring.boot.version>
+		<stripe.java.version>4.0.0</stripe.java.version>
 		<java.version>1.8</java.version>
-
 	</properties>
 
-	<!-- <repositories> <repository> <id>dynamodb-local</id> <name>DynamoDB 
-		Local Release Repository</name> <url>http://dynamodb-local.s3-website-us-west-2.amazonaws.com/release</url> 
-		</repository> </repositories> -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -38,25 +33,30 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.stripe</groupId>
-			<artifactId>stripe-java</artifactId>
-			<version>${stripe.java.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.sendgrid</groupId>
-			<artifactId>sendgrid-java</artifactId>
-		</dependency>
+
+		<!-- DB -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
+		
+		<!-- Payment getway -->
 		<dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>${stripe.java.version}</version>
 		</dependency>
 
 		<!-- Test dependencies -->
@@ -85,6 +85,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
 				<configuration>
 					<classifier>exec</classifier>
 				</configuration>

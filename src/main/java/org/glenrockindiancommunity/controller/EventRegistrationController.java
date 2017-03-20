@@ -3,7 +3,7 @@ package org.glenrockindiancommunity.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.glenrockindiancommunity.integrate.DoEverything;
+import org.glenrockindiancommunity.integrate.EventRegistrationService;
 import org.glenrockindiancommunity.model.Family;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class RegistrationController {
+public class EventRegistrationController {
 
-  private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+  private static final Logger log = LoggerFactory.getLogger(EventRegistrationController.class);
 
   @Autowired
-  private DoEverything doEverything;
+  private EventRegistrationService doEverything;
 
   /**
    * Submit the form to db, all in!
@@ -39,7 +39,7 @@ public class RegistrationController {
     family.setStripeReceiptNumber(tokenId);
 
     try {
-      family = doEverything.acceptPaymentSubscribeToMailChimpAndRegisterFamily(family);
+      family = doEverything.acceptPaymentAndRegisterFamily(family);
     } catch (Exception e) {
       log.error("Error submitting form " + e.getMessage());
       return "There was an error submitting your request " + e.getMessage() + "\n\n";
