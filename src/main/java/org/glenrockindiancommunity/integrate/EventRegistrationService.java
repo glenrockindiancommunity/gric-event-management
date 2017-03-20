@@ -23,13 +23,8 @@ public class EventRegistrationService {
   // standard US pricing of 2.9%
   private BigDecimal stripeTransactionPercent = new BigDecimal(0.029);
 
-  
-  
-  @Value("${adult.cost}")
   private BigDecimal adultCost = new BigDecimal(40);
-  @Value("${child.cost}")
   private BigDecimal childCost = new BigDecimal(20);
-  @Value("${non.gr.markup}")
   private BigDecimal nonGRMarkup = new BigDecimal(0.1);
 
   @Autowired

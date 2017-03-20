@@ -34,7 +34,7 @@ public class EventRegistrationController {
   @PostMapping(path = "/register/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public String registerFamily(@PathVariable String tokenId, @RequestBody Family family, Model model) {
 
-    log.info("Controller calling acceptPaymentSubscribeToMailChimpAndRegisterFamily");
+    log.info("Controller calling registerFamily");
 
     family.setStripeReceiptNumber(tokenId);
 
