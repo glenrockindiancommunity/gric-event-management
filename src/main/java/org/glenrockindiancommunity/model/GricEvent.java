@@ -31,14 +31,14 @@ public class GricEvent {
   private String contactEmail;
 
   // Event Charges
-  private BigDecimal adultCost;
-  private BigDecimal childCost;
+  private BigDecimal adultCost = new BigDecimal("0.0");
+  private BigDecimal childCost = new BigDecimal("0.0");
 
-  // Offload Stripe transactionFee to end user
-  private Boolean offLoadTransactionFee = false;
+  // Off load the ~3% Stripe transactionFee to end user
+  private boolean transactionFeeCharged = false;
 
   // if an event is free!
-  private Boolean free;
+  private boolean free = false;
 
   // Audit Info
   private String createdBy;
@@ -46,30 +46,33 @@ public class GricEvent {
   private String updatedBy;
   private Date updatedDate = new Date();
 
-  private Boolean pinned;
+  // Show on home page.
+  private boolean pinned = false;
 
   /**
-   * Minimum information required to create an event.
+   * Minimum data needed to create an event.
    * 
    * @param name
-   * @param description
-   * @param location
    * @param startDate
    * @param startTime
    * @param endDate
    * @param endTime
-   * @param contactEmail
+   * @param location
+   * @param adultCost
+   * @param childCost
+   * @param free
    */
-  public GricEvent(String name, String description, String location, String startDate, String startTime, String endDate,
-      String endTime, String contactEmail) {
+  public GricEvent(String name, String startDate, String startTime, String endDate, String endTime, String location,
+      BigDecimal adultCost, BigDecimal childCost, boolean free) {
     this.name = name;
-    this.description = description;
-    this.location = location;
     this.startDate = startDate;
     this.startTime = startTime;
     this.endDate = endDate;
     this.endTime = endTime;
-    this.contactEmail = contactEmail;
+    this.location = location;
+    this.adultCost = adultCost;
+    this.childCost = childCost;
+    this.free = free;
   }
 
   public String getId() {
@@ -128,11 +131,11 @@ public class GricEvent {
     return childCost;
   }
 
-  public Boolean getOffLoadTransactionFee() {
-    return offLoadTransactionFee;
+  public boolean isTransactionFeeCharged() {
+    return transactionFeeCharged;
   }
 
-  public Boolean getFree() {
+  public boolean isFree() {
     return free;
   }
 
@@ -152,7 +155,7 @@ public class GricEvent {
     return updatedDate;
   }
 
-  public Boolean getPinned() {
+  public boolean isPinned() {
     return pinned;
   }
 
@@ -212,11 +215,11 @@ public class GricEvent {
     this.childCost = childCost;
   }
 
-  public void setOffLoadTransactionFee(Boolean offLoadTransactionFee) {
-    this.offLoadTransactionFee = offLoadTransactionFee;
+  public void setTransactionFeeCharged(boolean transactionFeeCharged) {
+    this.transactionFeeCharged = transactionFeeCharged;
   }
 
-  public void setFree(Boolean free) {
+  public void setFree(boolean free) {
     this.free = free;
   }
 
@@ -236,7 +239,7 @@ public class GricEvent {
     this.updatedDate = updatedDate;
   }
 
-  public void setPinned(Boolean pinned) {
+  public void setPinned(boolean pinned) {
     this.pinned = pinned;
   }
 

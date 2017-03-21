@@ -1,14 +1,10 @@
 package org.glenrockindiancommunity.respository;
 
-import java.util.List;
-
 import org.glenrockindiancommunity.model.Family;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@Repository
+@RepositoryRestResource
 public interface FamilyRepository extends PagingAndSortingRepository<Family, String> {
 
   /**
@@ -19,9 +15,5 @@ public interface FamilyRepository extends PagingAndSortingRepository<Family, Str
    * @return
    */
   Family findByFamilyNameCode(String familyNameCode);
-
-  public Page<Family> findAll(Pageable pageable);
-
-  public List<Family> findAll();
 
 }

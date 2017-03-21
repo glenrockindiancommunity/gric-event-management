@@ -1,7 +1,6 @@
 package org.glenrockindiancommunity.controller;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.glenrockindiancommunity.integrate.EventRegistrationService;
 import org.glenrockindiancommunity.model.Family;
@@ -31,26 +30,24 @@ public class EventRegistrationController {
    * @param model
    * @return
    */
-  @PostMapping(path = "/register/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public String registerFamily(@PathVariable String tokenId, @RequestBody Family family, Model model) {
-
+  @PostMapping(path = "/register/{eventId}/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String registerFamily(@PathVariable String eventId, @PathVariable String tokenId, @RequestBody Family family,
+      Model model) {
     log.info("Controller calling registerFamily");
-
-    family.setStripeReceiptNumber(tokenId);
-
     try {
-      family = doEverything.acceptPaymentAndRegisterFamily(family);
+      family.setStripeReceiptNumber(tokenId);
+      family = doEverything.acceptPaymentAndRegisterFamily(eventId, family);
     } catch (Exception e) {
       log.error("Error submitting form " + e.getMessage());
       return "There was an error submitting your request " + e.getMessage() + "\n\n";
     }
-    return "<p>See you soon at the Diwali Party!. </p> <p>Your card has been charged <b>$" + family.getAmount() + "</b> for the event </p> <p>Your event confirmation id is  <b>"
-        + family.getFamilyNameCode() + "</b> and your payment confirmation id is <b>" + family.getStripeReceiptNumber()
-        + "</b>. </p>";
+    return "<p>See you soon at the " + eventId + ". </p> <p>Your card has been charged <b>$" + family.getAmount()
+        + "</b> for the event </p> <p>Your event confirmation id is  <b>" + family.getFamilyNameCode()
+        + "</b> and your payment confirmation id is <b>" + family.getStripeReceiptNumber() + "</b>. </p>";
   }
 
   /**
-   * Calculate the final cost of the event.
+   * Calculate the final cost of the event. This needs a wrapper api
    * 
    * @param townCode
    * @param adultCount
@@ -58,22 +55,11 @@ public class EventRegistrationController {
    * @param model
    * @return
    */
-  @GetMapping(path = "/register/calculatetotal/{townCode}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public BigDecimal calculateTotal(@PathVariable String townCode, @PathVariable int adultCount,
+  @GetMapping(path = "/register/calculatetotal/{eventId}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public BigDecimal calculateTotal(@PathVariable String eventId, @PathVariable int adultCount,
       @PathVariable int childCount, Model model) {
     log.info("Calculating cost...");
-    return doEverything.calculateTotalCharge(townCode, adultCount, childCount);
-  }
-
-  /**
-   * Json response of all the users registered for the event so far...
-   * 
-   * @param model
-   * @return
-   */
-  @GetMapping(path = "/register/showall", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public List<Family> showAllRegisteredUsers(Model model) {
-    return doEverything.showAll();
+    return doEverything.calculateTotalCharge(eventId, adultCount, childCount);
   }
 
 }

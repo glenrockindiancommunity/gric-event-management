@@ -1,15 +1,18 @@
 package org.glenrockindiancommunity.integrate;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.glenrockindiancommunity.model.Family;
+import org.glenrockindiancommunity.model.GricEvent;
+import org.glenrockindiancommunity.respository.EventRepository;
 import org.glenrockindiancommunity.respository.FamilyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class EventRegistrationService {
@@ -18,85 +21,94 @@ public class EventRegistrationService {
 
   // === Pricing Variables ===
 
-  // 30¢ per successful charge
-  private BigDecimal stripeFixedFee = new BigDecimal(0.3);
   // standard US pricing of 2.9%
   private BigDecimal stripeTransactionPercent = new BigDecimal(0.029);
-
-  private BigDecimal adultCost = new BigDecimal(40);
-  private BigDecimal childCost = new BigDecimal(20);
-  private BigDecimal nonGRMarkup = new BigDecimal(0.1);
+  // 30¢ per successful charge
+  private BigDecimal stripeFixedFee = new BigDecimal(0.3);
 
   @Autowired
   private Talk2Stripe talk2Stripe;
-
   @Autowired
-  private FamilyRepository repository;
-  
-  
+  private FamilyRepository familyRepo;
+  @Autowired
+  private EventRepository eventRepo;
 
   /**
    * read method name
    * 
    * @param family
    */
-  public Family acceptPaymentAndRegisterFamily(Family family) {
+  @Transactional
+  public Family acceptPaymentAndRegisterFamily(String eventId, Family family) {
 
     log.info("Accepting payment for family " + family.toString());
 
     try {
 
-      BigDecimal recalculatedAmount = calculateTotalCharge(family.getTown(), family.getAdults(), family.getChildren());
+      GricEvent event = eventRepo.findOne(eventId);
 
-      family.setAmount(recalculatedAmount);
+      if (!event.isFree()) {
+        BigDecimal recalculatedAmount = calculateTotalCharge(event, family.getAdults(), family.getChildren());
+        family.setAmount(recalculatedAmount);
 
-      // once the
-      log.info("Calling Stripe to charge...");
+        // once the price is calculated, call stripe
+        log.info("Calling Stripe to charge...");
 
-      // reset it, as token id is just a temporary variable for it.
-      family.setStripeReceiptNumber(
-          talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(), family.getStripeReceiptNumber()));
+        // reset it, as token id is just a temporary variable for it.
+        family.setStripeReceiptNumber(
+            talk2Stripe.createCharge(family.getPrimaryEmail(), family.getAmount(), family.getStripeReceiptNumber()));
+      }
 
       log.info("Saving family info to DB...");
-      // Now that payment was successful, now save everything to database.
-      repository.save(family);
-
+      // Now that payment was successful, save everything to database.
+      familyRepo.save(family);
     } catch (Exception e) {
       throw new RuntimeException(
           e.getMessage() + "There was an error processing your payment. Please get in touch with the organizers");
     }
-
     return family;
+  }
+
+  /**
+   * Exposed wrapper for REST call
+   * 
+   * @param eventId
+   * @param adultCount
+   * @param childCount
+   * @return
+   */
+  public BigDecimal calculateTotalCharge(String eventId, int adultCount, int childCount) {
+    GricEvent event = eventRepo.findOne(eventId);
+    return calculateTotalCharge(event, adultCount, childCount);
   }
 
   /**
    * Calculates the final fee for the event.
    * 
-   * @param townCode
+   * @param event
    * @param adultCount
    * @param childCount
    * @return
    */
-  public BigDecimal calculateTotalCharge(String townCode, int adultCount, int childCount) {
-    log.info(
-        "calculating total for; townCode: " + townCode + ", adultCount:" + adultCount + " , childCount:" + childCount);
+  private BigDecimal calculateTotalCharge(GricEvent event, int adultCount, int childCount) {
+    log.info("calculating total for: ");
+    log.info("adultCount:" + adultCount + " , childCount:" + childCount);
+    log.info("adultCost:" + event.getAdultCost() + " , childCost:" + event.getChildCost());
 
     // in cents.
-    BigDecimal adultCharge = adultCost.multiply(new BigDecimal(adultCount));
-    BigDecimal childCharge = childCost.multiply(new BigDecimal(childCount));
+    BigDecimal adultCharge = event.getAdultCost().multiply(new BigDecimal(adultCount));
+    BigDecimal childCharge = event.getChildCost().multiply(new BigDecimal(childCount));
 
     BigDecimal totalCharge = adultCharge.add(childCharge);
 
-    log.info("Base total charge for GR in cents : " + totalCharge);
+    log.info("Base total charge in cents : " + totalCharge);
 
-    if (!"GR".equalsIgnoreCase(townCode)) {
-      totalCharge = totalCharge.add(totalCharge.multiply(nonGRMarkup));
-      log.info("Base total charge if not from GR: " + totalCharge);
+    if (event.isTransactionFeeCharged()) {
+      totalCharge = addStripeFeeToTotal(totalCharge);
+
+      log.info("Final Total after Transaction Fee " + totalCharge);
+
     }
-
-    totalCharge = addStripeFeeToTotal(totalCharge);
-
-    log.info("Final Total after Stripe Charge: " + totalCharge);
 
     return totalCharge;
   }
@@ -129,7 +141,9 @@ public class EventRegistrationService {
   }
 
   public List<Family> showAll() {
-    return repository.findAll();
+    List<Family> families = new ArrayList<>();
+    familyRepo.findAll().forEach(families::add);
+    return families;
   }
 
 }
