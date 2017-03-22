@@ -20,6 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    http
+      .antMatcher("/admin/**")
+        .authorizeRequests()
+        .anyRequest()
+          .authenticated()
+      .and()
+      .antMatcher("/**")
+      .authorizeRequests()
+      .anyRequest().permitAll();
   }
 
 }

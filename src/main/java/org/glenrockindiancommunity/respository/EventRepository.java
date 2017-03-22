@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface EventRepository extends PagingAndSortingRepository<GricEvent, String> {
 
   GricEvent findByName(String name);
-
-  public List<GricEvent> findAllBetweenStartDateAndEndDate(String startDate, String endDate);
+  
+  List<GricEvent> findByEndDateGreaterThanEqual(String today);
 
 }

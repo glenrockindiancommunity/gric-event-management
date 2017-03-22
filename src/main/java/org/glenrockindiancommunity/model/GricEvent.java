@@ -20,9 +20,9 @@ public class GricEvent {
   private String id;
   private String name;
   private String description;
-  private String startDate;
+  private Date startDate;
   private String startTime;
-  private String endDate;
+  private Date endDate;
   private String endTime;
   private Integer maxCapacity = 0;
   private String location;
@@ -62,7 +62,7 @@ public class GricEvent {
    * @param childCost
    * @param free
    */
-  public GricEvent(String name, String startDate, String startTime, String endDate, String endTime, String location,
+  public GricEvent(String name, Date startDate, String startTime, Date endDate, String endTime, String location,
       BigDecimal adultCost, BigDecimal childCost, boolean free) {
     this.name = name;
     this.startDate = startDate;
@@ -87,7 +87,7 @@ public class GricEvent {
     return description;
   }
 
-  public String getStartDate() {
+  public Date getStartDate() {
     return startDate;
   }
 
@@ -95,7 +95,7 @@ public class GricEvent {
     return startTime;
   }
 
-  public String getEndDate() {
+  public Date getEndDate() {
     return endDate;
   }
 
@@ -171,7 +171,7 @@ public class GricEvent {
     this.description = description;
   }
 
-  public void setStartDate(String startDate) {
+  public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
 
@@ -179,7 +179,7 @@ public class GricEvent {
     this.startTime = startTime;
   }
 
-  public void setEndDate(String endDate) {
+  public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
 

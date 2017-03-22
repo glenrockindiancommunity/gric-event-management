@@ -44,9 +44,9 @@ public class EventRegistrationService {
     log.info("Accepting payment for family " + family.toString());
 
     try {
-
       GricEvent event = eventRepo.findOne(eventId);
 
+      // If an event is marked free, you'll not be charging anything.
       if (!event.isFree()) {
         BigDecimal recalculatedAmount = calculateTotalCharge(event, family.getAdults(), family.getChildren());
         family.setAmount(recalculatedAmount);

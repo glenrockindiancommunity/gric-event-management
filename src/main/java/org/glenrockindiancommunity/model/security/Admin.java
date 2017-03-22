@@ -10,12 +10,12 @@ public class Admin {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-
   private String id;
   private String email;
   private String password;
   private String firstname;
   private String lastname;
+  private boolean approved = false;
 
   public String getId() {
     return id;
@@ -55,6 +55,14 @@ public class Admin {
 
   public void setLastname(String lastname) {
     this.lastname = lastname;
+  }
+  
+  public boolean isApproved() {
+    return approved;
+  }
+  
+  public void setApproved(boolean approved) {
+    this.approved = approved; 
   }
 
 }

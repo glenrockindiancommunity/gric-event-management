@@ -1,8 +1,10 @@
 package org.glenrockindiancommunity.respository;
 
-import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.glenrockindiancommunity.model.security.Admin;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestController
-public class AdminRepository {
+@RepositoryRestResource
+public interface AdminRepository extends PagingAndSortingRepository<Admin, String> {
 
 }
