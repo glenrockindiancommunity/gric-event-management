@@ -1,6 +1,7 @@
 package org.glenrockindiancommunity.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -20,10 +21,8 @@ public class GricEvent {
   private String id;
   private String name;
   private String description;
-  private Date startDate;
-  private String startTime;
-  private Date endDate;
-  private String endTime;
+  private LocalDateTime startDateTime;
+  private LocalDateTime endDateTime;
   private Integer maxCapacity = 0;
   private String location;
   private String locationURL;
@@ -49,6 +48,9 @@ public class GricEvent {
   // Show on home page.
   private boolean pinned = false;
 
+  private GricEvent() {
+  }
+
   /**
    * Minimum data needed to create an event.
    * 
@@ -62,13 +64,11 @@ public class GricEvent {
    * @param childCost
    * @param free
    */
-  public GricEvent(String name, Date startDate, String startTime, Date endDate, String endTime, String location,
-      BigDecimal adultCost, BigDecimal childCost, boolean free) {
+  public GricEvent(String name, LocalDateTime startDate, LocalDateTime endDate, String location, BigDecimal adultCost,
+      BigDecimal childCost, boolean free) {
     this.name = name;
-    this.startDate = startDate;
-    this.startTime = startTime;
-    this.endDate = endDate;
-    this.endTime = endTime;
+    this.startDateTime = startDate;
+    this.endDateTime = endDate;
     this.location = location;
     this.adultCost = adultCost;
     this.childCost = childCost;
@@ -87,20 +87,12 @@ public class GricEvent {
     return description;
   }
 
-  public Date getStartDate() {
-    return startDate;
+  public LocalDateTime getStartDateTime() {
+    return startDateTime;
   }
 
-  public String getStartTime() {
-    return startTime;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public String getEndTime() {
-    return endTime;
+  public LocalDateTime getEndDateTime() {
+    return endDateTime;
   }
 
   public Integer getMaxCapacity() {
@@ -171,20 +163,12 @@ public class GricEvent {
     this.description = description;
   }
 
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
+  public void setStartDateTime(LocalDateTime startDateTime) {
+    this.startDateTime = startDateTime;
   }
 
-  public void setStartTime(String startTime) {
-    this.startTime = startTime;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
-  public void setEndTime(String endTime) {
-    this.endTime = endTime;
+  public void setEndDateTime(LocalDateTime endDateTime) {
+    this.endDateTime = endDateTime;
   }
 
   public void setMaxCapacity(Integer maxCapacity) {

@@ -1,5 +1,6 @@
 package org.glenrockindiancommunity.respository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.glenrockindiancommunity.model.GricEvent;
@@ -10,7 +11,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface EventRepository extends PagingAndSortingRepository<GricEvent, String> {
 
   GricEvent findByName(String name);
-  
-  List<GricEvent> findByEndDateGreaterThanEqual(String today);
+
+  List<GricEvent> findByEndDateTimeGreaterThanEqual(LocalDateTime today);
 
 }
