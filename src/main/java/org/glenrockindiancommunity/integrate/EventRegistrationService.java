@@ -40,7 +40,6 @@ public class EventRegistrationService {
    */
   @Transactional
   public Family acceptPaymentAndRegisterFamily(String eventId, Family family) {
-
     log.info("Accepting payment for family " + family.toString());
 
     try {
@@ -60,6 +59,7 @@ public class EventRegistrationService {
       }
 
       log.info("Saving family info to DB...");
+
       // Now that payment was successful, save everything to database.
       familyRepo.save(family);
     } catch (Exception e) {
@@ -95,7 +95,7 @@ public class EventRegistrationService {
     log.info("adultCount:" + adultCount + " , childCount:" + childCount);
     log.info("adultCost:" + event.getAdultCost() + " , childCost:" + event.getChildCost());
 
-    // in cents.
+    // in cents
     BigDecimal adultCharge = event.getAdultCost().multiply(new BigDecimal(adultCount));
     BigDecimal childCharge = event.getChildCost().multiply(new BigDecimal(childCount));
 
@@ -105,9 +105,7 @@ public class EventRegistrationService {
 
     if (event.isTransactionFeeCharged()) {
       totalCharge = addStripeFeeToTotal(totalCharge);
-
       log.info("Final Total after Transaction Fee " + totalCharge);
-
     }
 
     return totalCharge;

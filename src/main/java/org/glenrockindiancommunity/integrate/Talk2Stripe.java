@@ -27,9 +27,8 @@ public class Talk2Stripe {
   private GricConfigProperties gricConfigProperties;
 
   /**
-   * * The checkout form only makes a token, the final charge happens using this
+   * The checkout form only makes a token, the final charge happens using this
    * call.
-   * 
    * 
    * @param email
    *          - Primary Email
@@ -60,9 +59,9 @@ public class Talk2Stripe {
       chargeParams.put("amount", amount.multiply(new BigDecimal("100")).intValueExact());
       chargeParams.put("currency", "usd");
       chargeParams.put("source", token);
-      chargeParams.put("description", "Glen Rock Indian Diwali Dhamaka - 2016");
+      chargeParams.put("description", "Glen Rock Indian Community Event");
       chargeParams.put("receipt_email", email);
-      chargeParams.put("statement_descriptor", "GRIC Diwali 2016");
+      chargeParams.put("statement_descriptor", "Glen Rock Indian Community Event");
 
       Charge charge = Charge.create(chargeParams);
 
@@ -75,5 +74,4 @@ public class Talk2Stripe {
       throw e;
     }
   }
-
 }

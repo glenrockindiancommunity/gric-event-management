@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Glen Rock Indian Community - Diwali Registration</title>
+<title>Glen Rock Indian Community - Registration</title>
 
 <!-- Include CSS -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="static/js/registration.js"></script>
 </head>
 <body>
-  <h1>Glen Rock Indian Community Diwali Registration - 2016</h1>
+  <h1>Glen Rock Indian Community Registration - 2016</h1>
   <form action="#" method="POST" id="mainForm">
     <input type='hidden' name="issubmit" value="1">
     <!-- Tabs -->
@@ -183,7 +183,7 @@
               <button id="customButton" class="payNow">Purchase Tickets!</button> <script>
 															var handler = StripeCheckout
 																	.configure({
-																		key : "pk_live_KsVk9skQH8fAb1T50X5MCFXU",
+																		key : "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
 																		image : "static/images/diya.png",
 																		locale : "auto",
 																		token : function(
