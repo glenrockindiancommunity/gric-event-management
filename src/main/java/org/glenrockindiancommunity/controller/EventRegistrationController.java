@@ -2,7 +2,7 @@ package org.glenrockindiancommunity.controller;
 
 import java.math.BigDecimal;
 
-import org.glenrockindiancommunity.integrate.EventRegistrationService;
+import org.glenrockindiancommunity.integrate.EventRegistration;
 import org.glenrockindiancommunity.model.Family;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class EventRegistrationController {
   private static final Logger log = LoggerFactory.getLogger(EventRegistrationController.class);
 
   @Autowired
-  private EventRegistrationService doEverything;
+  private EventRegistration doEverything;
 
   /**
    * Submit the form to db, all in!
@@ -30,10 +30,12 @@ public class EventRegistrationController {
    * @param model
    * @return
    */
-  @PostMapping(path = "/register/{eventId}/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public String registerFamily(@PathVariable String eventId, @PathVariable String tokenId, @RequestBody Family family,
-      Model model) {
+  @PostMapping(path = "/register/family/{tokenId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String registerFamily(@PathVariable String tokenId, @RequestBody Family family, Model model) {
     log.info("Controller calling registerFamily");
+
+    String eventId = family.getEventId();
+
     try {
       family.setStripeReceiptNumber(tokenId);
       family = doEverything.acceptPaymentAndRegisterFamily(eventId, family);
@@ -57,7 +59,7 @@ public class EventRegistrationController {
    */
   @GetMapping(path = "/register/calculatetotal/{eventId}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public BigDecimal calculateTotal(@PathVariable String eventId, @PathVariable int adultCount,
-      @PathVariable int childCount, Model model) {
+      @PathVariable int childCount) {
     log.info("Calculating cost...");
     return doEverything.calculateTotalCharge(eventId, adultCount, childCount);
   }

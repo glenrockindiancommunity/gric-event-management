@@ -2,12 +2,11 @@ $(document).ready(
 		function() {
 			// Smart Wizard
 			$('#wizard').smartWizard({
-				/* contentURL: '/register/family', */
+				// contentURL : '/event' + $('#eventId').val(),
 				transitionEffect : 'slideLeft',
 				enableAllSteps : false,
 				keyNavigation : false, // Enable/Disable key
-				// navigation(left
-				// and right keys are used if enabled)
+				// navigation(left and right keys are used if enabled)
 				hideButtonsOnDisabled : true,
 				onLeaveStep : leaveAStepCallback,
 				onShowStep : showStepCallback,
@@ -19,11 +18,11 @@ $(document).ready(
 				var step_num = obj.attr('rel');
 				$('.buttonFinish').hide();
 				if (step_num == 2) {
+					var eventId = $('#eventId').val();
 					var town = $('#town').val();
 					var adults = $('#adults').val();
 					var children = $('#children').val();
-					var url = "/register/calculatetotal/" + town + "/" + adults
-							+ "/" + children;
+					var url = "/register/calculatetotal/" + eventId + "/" + adults + "/" + children;
 					$.get(url, function(data, status) {
 						$('#totalCharge').text(data);
 					});

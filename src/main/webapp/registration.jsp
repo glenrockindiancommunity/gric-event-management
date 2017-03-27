@@ -7,18 +7,16 @@
 <link href="static/css/smart_wizard.css" rel="stylesheet" type="text/css">
 
 <!-- Include JS -->
-<script type="text/javascript">
-var eventId = '<%= request.getParameter("id") %>';
-</script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script type="text/javascript" src="static/js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="static/js/jquery.smartWizard.js"></script>
 <script type="text/javascript" src="static/js/registration.js"></script>
 </head>
 <body>
-  <h1>Glen Rock Indian Community Registration - 2016</h1>
+  <h6>Glen Rock Indian Community Registration - 2016</h6>
   <form action="#" method="POST" id="mainForm">
     <input type='hidden' name="issubmit" value="1">
+    <input type='hidden' name="eventId" id="eventId" value='<%=request.getParameter("id")%>'>
     <!-- Tabs -->
     <div id="wizard" class="swMain">
       <ul>
@@ -183,51 +181,8 @@ var eventId = '<%= request.getParameter("id") %>';
           </tr>
           <tr>
             <td align="center">
-              <button id="customButton" class="payNow">Purchase Tickets!</button> <script>
-															var handler = StripeCheckout
-																	.configure({
-																		key : "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
-																		image : "static/images/diya.png",
-																		locale : "auto",
-																		token : function(
-																				token) {
-																			// You can access the token ID with `token.id`.
-																			// Get the token ID to your server-side code for use.
-																			$(
-																					"stripeReceiptNumber")
-																					.val(
-																							token.id);
-																			submitPageForm(token.id);
-																		}
-																	});
-
-															document
-																	.getElementById(
-																			'customButton')
-																	.addEventListener(
-																			'click',
-																			function(
-																					e) {
-																				// Open Checkout with further options:
-																				handler
-																						.open({
-																							name : 'GRIC Diwali - 2016',
-																							description : 'Diwali Dhamaka Registration Payment',
-																							zipCode : true
-																						});
-																				e
-																						.preventDefault();
-																			});
-
-															// Close Checkout on page navigation:
-															window
-																	.addEventListener(
-																			'popstate',
-																			function() {
-																				handler
-																						.close();
-																			});
-														</script>
+              <button id="customButton" class="payNow">Purchase Tickets!</button> <script type="text/javascript"
+                src="static/js/stripe-payment.js"></script>
             </td>
           </tr>
         </table>

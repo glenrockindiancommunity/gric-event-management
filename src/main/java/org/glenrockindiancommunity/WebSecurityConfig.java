@@ -1,6 +1,7 @@
 package org.glenrockindiancommunity;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,16 +21,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+//    http
+//      .authorizeRequests()
+//      .antMatchers(HttpMethod.POST, "/event/**")
+//      .fullyAuthenticated();
+    
     http
-      .antMatcher("/event/**")
-        .authorizeRequests()
-        .anyRequest()
-          .authenticated()
-      .and()
+      .authorizeRequests()
+      .antMatchers(HttpMethod.DELETE, "/**")
+      .denyAll();
+  
+    http
       .antMatcher("/**")
       .authorizeRequests()
       .anyRequest().permitAll();
     
+    // For REST calls (need more investigation)
     http.csrf().disable();
   }
 
