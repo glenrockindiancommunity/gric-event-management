@@ -49,6 +49,7 @@ public class GricEvent {
   private boolean pinned = false;
 
   private GricEvent() {
+    //hibernate or jackson wants it
   }
 
   /**

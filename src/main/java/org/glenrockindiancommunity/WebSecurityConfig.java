@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-      .antMatcher("/admin/**")
+      .antMatcher("/event/**")
         .authorizeRequests()
         .anyRequest()
           .authenticated()
@@ -29,6 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .antMatcher("/**")
       .authorizeRequests()
       .anyRequest().permitAll();
+    
+    http.csrf().disable();
   }
 
 }
