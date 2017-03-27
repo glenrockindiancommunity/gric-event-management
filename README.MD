@@ -19,7 +19,8 @@ POST to ```/event```
 
 Use the json
 
-```{
+```
+{
   "name" : "GRIC Diwali 2016",
   "startDateTime" : "2017-09-28T18:00:00Z",
   "endDateTime" : "2017-09-28T23:00:00Z",
@@ -27,6 +28,7 @@ Use the json
   "adultCost" : "100.00",
   "childCost" : "50.00",
   "free" : false
-  }```
+  }
+```
 
 Import into your IDE, and work!
