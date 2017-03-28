@@ -1,7 +1,7 @@
 package org.glenrockindiancommunity.integrate;
 
 import org.glenrockindiancommunity.model.security.Admin;
-import org.glenrockindiancommunity.respository.AdminRepository;
+import org.glenrockindiancommunity.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
