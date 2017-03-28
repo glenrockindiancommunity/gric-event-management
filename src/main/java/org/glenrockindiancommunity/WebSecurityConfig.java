@@ -1,6 +1,8 @@
 package org.glenrockindiancommunity;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,17 +22,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http
-      .antMatcher("/event/**")
-        .authorizeRequests()
-        .anyRequest()
-          .authenticated()
+    http.httpBasic().and().authorizeRequests()
+            .antMatchers(HttpMethod.GET,"/event/**").permitAll()
+      .antMatchers("/event/**")
+        .hasRole("ADMIN")
       .and()
       .antMatcher("/**")
       .authorizeRequests()
       .anyRequest().permitAll();
-    
+
     http.csrf().disable();
+    http.headers().frameOptions().disable();
   }
 
+  protected void configure(AuthenticationManagerBuilder auth)
+          throws Exception {
+    auth.inMemoryAuthentication().withUser("admin1").password("secret1")
+            .roles("ADMIN");
+  }
 }
