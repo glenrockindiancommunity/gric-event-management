@@ -31,7 +31,7 @@
 
 </head>
 <body>
-  <h1>Glen Rock Indian Community Events</h1>
+  <h6>Glen Rock Indian Community Events</h6>
 
   <table id="table">
     <thead>

@@ -14,6 +14,7 @@ public class Family {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
+  private String eventId;
   private String familyNameCode;
   private String lastname;
   private String firstname;
@@ -45,6 +46,14 @@ public class Family {
 
   public String getId() {
     return id;
+  }
+  
+  public String getEventId() {
+    return eventId;
+  }
+
+  public void setEventId(String eventId) {
+    this.eventId = eventId;
   }
 
   public String getFamilyNameCode() {

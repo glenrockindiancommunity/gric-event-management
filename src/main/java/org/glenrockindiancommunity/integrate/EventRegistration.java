@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class EventRegistrationService {
+public class EventRegistration {
 
-  private static final Logger log = LoggerFactory.getLogger(EventRegistrationService.class);
+  private static final Logger log = LoggerFactory.getLogger(EventRegistration.class);
 
   // === Pricing Variables ===
 
@@ -78,6 +78,8 @@ public class EventRegistrationService {
    * @return
    */
   public BigDecimal calculateTotalCharge(String eventId, int adultCount, int childCount) {
+    log.info("calculating total for event : " + eventId);
+    
     GricEvent event = eventRepo.findOne(eventId);
     return calculateTotalCharge(event, adultCount, childCount);
   }

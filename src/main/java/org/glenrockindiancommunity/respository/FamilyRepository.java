@@ -4,7 +4,7 @@ import org.glenrockindiancommunity.model.Family;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource
+@RepositoryRestResource(path = "family")
 public interface FamilyRepository extends PagingAndSortingRepository<Family, String> {
 
   /**
