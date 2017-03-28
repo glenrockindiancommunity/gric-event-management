@@ -1,6 +1,7 @@
 package org.glenrockindiancommunity;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,9 +9,13 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
+import javax.sql.DataSource;
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource dataSource;
 
     /**
      * Stuff which should not need authentication.
@@ -31,6 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/event/**").permitAll()
                 .antMatchers("/event/**")
                 .hasRole("ADMIN")
+                .and().formLogin().loginPage("/login")
+                .usernameParameter("username").passwordParameter("password")
                 .and()
                 .antMatcher("/**")
                 .authorizeRequests()
