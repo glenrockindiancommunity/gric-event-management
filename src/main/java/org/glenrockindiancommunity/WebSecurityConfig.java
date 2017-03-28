@@ -22,14 +22,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.DELETE, "/**")
+                .denyAll();
+
         http.httpBasic().and().authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/event/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/event/**").permitAll()
                 .antMatchers("/event/**")
                 .hasRole("ADMIN")
                 .and()
                 .antMatcher("/**")
                 .authorizeRequests()
                 .anyRequest().permitAll();
+
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
@@ -39,4 +45,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("admin1").password("secret1")
                 .roles("ADMIN");
     }
+
 }
