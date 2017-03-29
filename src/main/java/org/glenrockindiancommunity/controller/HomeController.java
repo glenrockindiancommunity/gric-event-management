@@ -30,7 +30,7 @@ public class HomeController {
   public List<GricEvent> futureEvents() {
     // Allow the event to be shown a day after the event has happened.
     LocalDateTime today = LocalDateTime.now().plusDays(1L);
-    return eventRepository.findByEndDateTimeGreaterThanEqual(today);
+    return eventRepository.findAllByEndDateTimeGreaterThanEqualOrderByStartDateTimeAsc(today);
   }
 
 }

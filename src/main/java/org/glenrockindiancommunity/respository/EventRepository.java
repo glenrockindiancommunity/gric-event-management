@@ -12,6 +12,6 @@ public interface EventRepository extends PagingAndSortingRepository<GricEvent, I
 
   GricEvent findByName(String name);
 
-  List<GricEvent> findByEndDateTimeGreaterThanEqual(LocalDateTime today);
+  List<GricEvent> findAllByEndDateTimeGreaterThanEqualOrderByStartDateTimeAsc(LocalDateTime today);
 
 }

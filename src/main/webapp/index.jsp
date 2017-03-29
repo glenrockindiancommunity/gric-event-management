@@ -13,7 +13,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$.get("/upcoming", function(data, status) {
+		$.get("/event", function(data, status) {
 			var events = data._embedded.events;
 	    var html = "" 
 			for ( var i in events) {

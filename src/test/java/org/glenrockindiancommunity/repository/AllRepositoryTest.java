@@ -49,7 +49,7 @@ public class AllRepositoryTest {
 
     eventRepository.save(event);
 
-    List<GricEvent> nowEvent = eventRepository.findByEndDateTimeGreaterThanEqual(LocalDateTime.now());
+    List<GricEvent> nowEvent = eventRepository.findAllByEndDateTimeGreaterThanEqualOrderByStartDateTimeAsc(LocalDateTime.now());
 
     Assert.assertEquals(nowEvent.get(0).getId(), event.getId());
   }
@@ -62,7 +62,7 @@ public class AllRepositoryTest {
 
     eventRepository.save(event);
 
-    List<GricEvent> nowEvent = eventRepository.findByEndDateTimeGreaterThanEqual(LocalDateTime.now());
+    List<GricEvent> nowEvent = eventRepository.findAllByEndDateTimeGreaterThanEqualOrderByStartDateTimeAsc(LocalDateTime.now());
 
     Assert.assertEquals(nowEvent.size(), 0);
 
