@@ -39,7 +39,7 @@ public class EventRegistration {
    * @param family
    */
   @Transactional
-  public Family acceptPaymentAndRegisterFamily(String eventId, Family family) {
+  public Family acceptPaymentAndRegisterFamily(Integer eventId, Family family) {
     log.info("Accepting payment for family " + family.toString());
 
     try {
@@ -77,7 +77,7 @@ public class EventRegistration {
    * @param childCount
    * @return
    */
-  public BigDecimal calculateTotalCharge(String eventId, int adultCount, int childCount) {
+  public BigDecimal calculateTotalCharge(Integer eventId, int adultCount, int childCount) {
     log.info("calculating total for event : " + eventId);
     
     GricEvent event = eventRepo.findOne(eventId);

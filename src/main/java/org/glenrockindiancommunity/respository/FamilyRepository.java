@@ -5,7 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path = "family")
-public interface FamilyRepository extends PagingAndSortingRepository<Family, String> {
+public interface FamilyRepository extends PagingAndSortingRepository<Family, Integer> {
 
   /**
    * familyNameCode is a unique generated id, which each registered family will

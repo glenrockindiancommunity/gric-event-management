@@ -65,6 +65,21 @@ public class AllRepositoryTest {
     List<GricEvent> nowEvent = eventRepository.findByEndDateTimeGreaterThanEqual(LocalDateTime.now());
 
     Assert.assertEquals(nowEvent.size(), 0);
+
   }
+  
+  @Test
+  public void testGetEvent() {
+    GricEvent event = new GricEvent("Holi Event", LocalDateTime.now().minusDays(5),
+        LocalDateTime.now().minusDays(5).plusHours(4), "Saddle River County Pary", new BigDecimal("10.00"),
+        new BigDecimal("5.0"), false);
+
+    eventRepository.save(event);
+
+    GricEvent dbEvent = eventRepository.findOne(event.getId());
+    Assert.assertEquals(event.getName(), dbEvent.getName());
+  }
+
+
 
 }

@@ -13,8 +13,8 @@ public class Family {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
-  private String eventId;
+  private Integer id;
+  private Integer eventId;
   private String familyNameCode;
   private String lastname;
   private String firstname;
@@ -44,15 +44,15 @@ public class Family {
     this.volunteer = volunteer;
   }
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
   
-  public String getEventId() {
+  public Integer getEventId() {
     return eventId;
   }
 
-  public void setEventId(String eventId) {
+  public void setEventId(Integer eventId) {
     this.eventId = eventId;
   }
 
@@ -100,7 +100,7 @@ public class Family {
     return volunteer;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

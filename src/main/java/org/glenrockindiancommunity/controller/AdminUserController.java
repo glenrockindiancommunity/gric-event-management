@@ -13,7 +13,7 @@ public class AdminUserController {
   private AdminApproval approval;
 
   @PostMapping(path = "/admin/approve/{adminId}")
-  public void acceptRegistration(@PathVariable String adminId) {
+  public void acceptRegistration(@PathVariable Integer adminId) {
     approval.approveAdmin(adminId);
   }
 

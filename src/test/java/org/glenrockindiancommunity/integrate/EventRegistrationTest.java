@@ -16,7 +16,7 @@ public class EventRegistrationTest {
 
   // @Test
   public void testCalculateTotalChargeOffLoadTxFee() {
-    String eventId = "offloadTxFee";
+    Integer eventId = 5;
     int adultCount = 2;
     int childCount = 1;
 
@@ -31,7 +31,7 @@ public class EventRegistrationTest {
 
   // @Test
   public void testCalculateTotalChargeabsorbTxFee() {
-    String eventId = "absorbTransactionFee";
+    Integer eventId = 5;
     int adultCount = 2;
     int childCount = 1;
 

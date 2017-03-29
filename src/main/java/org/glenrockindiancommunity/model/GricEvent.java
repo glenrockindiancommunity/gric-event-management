@@ -18,7 +18,7 @@ public class GricEvent {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private Integer id;
   private String name;
   private String description;
   private LocalDateTime startDateTime;
@@ -76,7 +76,7 @@ public class GricEvent {
     this.free = free;
   }
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -152,7 +152,7 @@ public class GricEvent {
     return pinned;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path = "/event", collectionResourceRel = "events")
-public interface EventRepository extends PagingAndSortingRepository<GricEvent, String> {
+public interface EventRepository extends PagingAndSortingRepository<GricEvent, Integer> {
 
   GricEvent findByName(String name);
 

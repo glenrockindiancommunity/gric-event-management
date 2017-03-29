@@ -19,7 +19,7 @@ public class AdminApproval {
    * @return
    */
   @PreAuthorize("isFullyAuthenticated()")
-  public boolean approveAdmin(String adminId) {
+  public boolean approveAdmin(Integer adminId) {
     Admin admin = adminRepository.findOne(adminId);
     admin.setApproved(true);
     adminRepository.save(admin);

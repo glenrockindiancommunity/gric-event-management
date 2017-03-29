@@ -10,14 +10,14 @@ public class Admin {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private Integer id;
   private String email;
   private String password;
   private String firstname;
   private String lastname;
   private boolean approved = false;
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -37,7 +37,7 @@ public class Admin {
     return lastname;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

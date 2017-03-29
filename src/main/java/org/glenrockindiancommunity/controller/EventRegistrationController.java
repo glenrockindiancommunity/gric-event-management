@@ -34,7 +34,7 @@ public class EventRegistrationController {
   public String registerFamily(@PathVariable String tokenId, @RequestBody Family family, Model model) {
     log.info("Controller calling registerFamily");
 
-    String eventId = family.getEventId();
+    Integer eventId = family.getEventId();
 
     try {
       family.setStripeReceiptNumber(tokenId);
@@ -58,7 +58,7 @@ public class EventRegistrationController {
    * @return
    */
   @GetMapping(path = "/register/calculatetotal/{eventId}/{adultCount}/{childCount}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public BigDecimal calculateTotal(@PathVariable String eventId, @PathVariable int adultCount,
+  public BigDecimal calculateTotal(@PathVariable Integer eventId, @PathVariable int adultCount,
       @PathVariable int childCount) {
     log.info("Calculating cost...");
     return doEverything.calculateTotalCharge(eventId, adultCount, childCount);
