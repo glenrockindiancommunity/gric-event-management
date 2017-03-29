@@ -21,7 +21,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 public class RegistrationTests {
 
   @Autowired
-  private EventRegistrationController service;
+  private FamilyRegistrationController service;
 
   @Autowired
   private MockRestServiceServer server;

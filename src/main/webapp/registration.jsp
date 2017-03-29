@@ -35,6 +35,7 @@
 		      $('#eventPricing').text("Adults: $" + event.adultCost + " - Kids: $" + event.childCost);
 		      $('#eventTime').append(dateTime);
 		      $('#eventTimeAgain').append(dateTime);
+		      $('#eventImage').val(event.paymentLogo);
 		});
 	}
 </script>
@@ -44,8 +45,9 @@
     Glen Rock Indian Community <span id="eventName"></span> Registration
   </h1>
   <form action="#" method="POST" id="mainForm">
-    <input type='hidden' name="issubmit" value="1"> <input type='hidden' name="eventId" id="eventId"
-      value='<%=request.getParameter("id")%>'>
+    <input type='hidden' name="issubmit" value="1"> 
+    <input type='hidden' name="eventId" id="eventId" value='<%=request.getParameter("id")%>'>
+    <input type='hidden' name="eventImage" id="eventImage" value=''>
     <!-- Tabs -->
     <div id="wizard" class="swMain">
       <ul>
@@ -214,7 +216,7 @@
             <td align="left">
               <p id="confirmationMessage">&nbsp;</p>
               <p>Please make a copy of this page for your reference. See you at the event!</p>
-              <p>You should also be receiving an email from Stripe.com with the details of the charge.</p>
+              <p>You should also be receiving an email from Stripe.com with the details of the charge. Your credit card will have a charge from "GRIC Payment"</p>
               <p>If you have any further questions, you can email at <span id="eventContactEmailAgain">&nbsp;</span></p>
               <p>&nbsp;</p>
               <h2 align="center" id="eventAddressAgain">&nbsp;</h2>

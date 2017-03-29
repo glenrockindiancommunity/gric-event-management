@@ -36,6 +36,8 @@ public class GricEvent {
   // Off load the ~3% Stripe transactionFee to end user
   private boolean transactionFeeCharged = false;
 
+  private String paymentLogo;
+
   // if an event is free!
   private boolean free = false;
 
@@ -49,7 +51,7 @@ public class GricEvent {
   private boolean pinned = false;
 
   private GricEvent() {
-    //hibernate or jackson wants it
+    // hibernate or jackson wants it
   }
 
   /**
@@ -128,6 +130,10 @@ public class GricEvent {
     return transactionFeeCharged;
   }
 
+  public String getPaymentLogo() {
+    return paymentLogo;
+  }
+
   public boolean isFree() {
     return free;
   }
@@ -202,6 +208,10 @@ public class GricEvent {
 
   public void setTransactionFeeCharged(boolean transactionFeeCharged) {
     this.transactionFeeCharged = transactionFeeCharged;
+  }
+
+  public void setPaymentLogo(String paymentLogo) {
+    this.paymentLogo = paymentLogo;
   }
 
   public void setFree(boolean free) {

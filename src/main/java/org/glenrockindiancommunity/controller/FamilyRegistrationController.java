@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class EventRegistrationController {
+public class FamilyRegistrationController {
 
-  private static final Logger log = LoggerFactory.getLogger(EventRegistrationController.class);
+  private static final Logger log = LoggerFactory.getLogger(FamilyRegistrationController.class);
 
   @Autowired
   private EventRegistration doEverything;

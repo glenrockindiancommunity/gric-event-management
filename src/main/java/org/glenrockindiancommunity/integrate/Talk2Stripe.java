@@ -61,7 +61,7 @@ public class Talk2Stripe {
       chargeParams.put("source", token);
       chargeParams.put("description", "Glen Rock Indian Community Event");
       chargeParams.put("receipt_email", email);
-      chargeParams.put("statement_descriptor", "Glen Rock Indian Community Event");
+      chargeParams.put("statement_descriptor", "GRIC Payment");
 
       Charge charge = Charge.create(chargeParams);
 
