@@ -49,5 +49,7 @@
   <h6>
     Developed by: <a href="http://protonfever.blogspot.com/">Varun Mehta</a>
   </h6>
+
+  <a href="/logout" />Logout</a>
 </body>
 </html>

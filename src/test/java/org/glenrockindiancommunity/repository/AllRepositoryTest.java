@@ -1,20 +1,17 @@
 package org.glenrockindiancommunity.repository;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-
 import org.glenrockindiancommunity.model.Family;
 import org.glenrockindiancommunity.model.GricEvent;
-import org.glenrockindiancommunity.respository.AdminRepository;
-import org.glenrockindiancommunity.respository.EventRepository;
-import org.glenrockindiancommunity.respository.FamilyRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

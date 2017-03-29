@@ -1,4 +1,4 @@
-package org.glenrockindiancommunity.respository;
+package org.glenrockindiancommunity.repository;
 
 import org.glenrockindiancommunity.model.security.Admin;
 import org.springframework.data.repository.PagingAndSortingRepository;

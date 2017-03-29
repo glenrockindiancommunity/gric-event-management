@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.glenrockindiancommunity.model.Family;
 import org.glenrockindiancommunity.model.GricEvent;
-import org.glenrockindiancommunity.respository.EventRepository;
-import org.glenrockindiancommunity.respository.FamilyRepository;
+import org.glenrockindiancommunity.repository.EventRepository;
+import org.glenrockindiancommunity.repository.FamilyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
