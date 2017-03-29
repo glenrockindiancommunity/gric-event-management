@@ -1,5 +1,5 @@
 var handler = StripeCheckout.configure({
-	key : "pk_test_8nOh4pljYTX09ZXSIAB9FB1o",
+	key : "pk_test_nszotlTHR4kvffxr5YH3HUIm",
 	locale : "auto",
 	token : function(token) {
 		// You can access the token ID with `token.id`.
