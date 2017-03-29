@@ -17,12 +17,14 @@ $(document).ready(
 			function leaveAStepCallback(obj) {
 				var step_num = obj.attr('rel');
 				$('.buttonFinish').hide();
+				
 				if (step_num == 2) {
 					var eventId = $('#eventId').val();
 					var town = $('#town').val();
 					var adults = $('#adults').val();
 					var children = $('#children').val();
-					var url = "/register/calculatetotal/" + eventId + "/" + adults + "/" + children;
+					var url = "/register/calculatetotal/" + eventId + "/"
+							+ adults + "/" + children;
 					$.get(url, function(data, status) {
 						$('#totalCharge').text(data);
 					});
@@ -32,6 +34,11 @@ $(document).ready(
 
 			function showStepCallback(obj) {
 				var step = obj.attr('rel');
+				
+				if (step == 1) {
+					populateEventDetails();
+				}
+				
 				if (step == 3) {
 					$('.buttonNext').hide();
 				}
@@ -40,7 +47,6 @@ $(document).ready(
 					$('.buttonPrevious').hide();
 					$('buttonFinish').hide();
 				}
-
 			}
 
 			function onFinishCallback() {
