@@ -13,29 +13,15 @@
 <script type="text/javascript" src="static/js/jquery-dateFormat.min.js"></script>
 <script type="text/javascript" src="static/js/jquery.smartWizard.js"></script>
 <script type="text/javascript" src="static/js/registration.js"></script>
+<script type="text/javascript" src="static/js/stripe-payment.js"></script>
 
 <script type="text/javascript">
-		function populateEventDetails() {
+		function populateEvent() {
 		    var eventId = $("eventId").val();
 		    var url = "/event/" + <%=request.getParameter("id")%>;
 		    $.get(url, function(data, status) {
-		      var html = ""
-		      var event = data;
-		      $('#eventName').text(event.name);
-		      $('#eventNameAgain').text(event.name);
-		      $('#eventAddress').text(event.location);
-		      $('#eventAddressAgain').text(event.location);
-	        $('#eventDescription').text(event.description);
-	        $('#eventFlyer').append('<a href="' + event.flyerUrl + '">' + event.flyerUrl + '</a>');
-	        $('#eventMap').attr('src', event.locationURL);
-	        $('#eventContactEmail').append('<a href="mailto:' + event.contactEmail + '">' + event.contactEmail + '</a>');
-	        $('#eventContactEmailAgain').append('<a href="mailto:' + event.contactEmail + '">' + event.contactEmail + '</a>');
-		      
-		      var dateTime = $.format.date(event.startDateTime, "hh:mm a") + " - " + $.format.date(event.endDateTime, "hh:mm a") + ",<br />" + $.format.date(event.endDateTime, "ddd, MMMM dd, yyyy") 
-		      $('#eventPricing').text("Adults: $" + event.adultCost + " - Kids: $" + event.childCost);
-		      $('#eventTime').append(dateTime);
-		      $('#eventTimeAgain').append(dateTime);
-		      $('#eventImage').val(event.paymentLogo);
+		    	registerStripeJs(data);
+		    	populateEventDetails(data)		    	
 		});
 	}
 </script>
@@ -200,8 +186,7 @@
           </tr>
           <tr>
             <td align="center">
-              <button id="customButton" class="payNow">Purchase Tickets!</button> <script type="text/javascript"
-                src="static/js/stripe-payment.js"></script>
+              <button id="customButton" class="payNow">Purchase Tickets!</button>
             </td>
           </tr>
         </table>

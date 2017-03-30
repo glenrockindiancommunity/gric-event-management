@@ -17,7 +17,7 @@ $(document).ready(
 			function leaveAStepCallback(obj) {
 				var step_num = obj.attr('rel');
 				$('.buttonFinish').hide();
-				
+
 				if (step_num == 2) {
 					var eventId = $('#eventId').val();
 					var town = $('#town').val();
@@ -34,11 +34,11 @@ $(document).ready(
 
 			function showStepCallback(obj) {
 				var step = obj.attr('rel');
-				
+
 				if (step == 1) {
-					populateEventDetails();
+					populateEvent();
 				}
-				
+
 				if (step == 3) {
 					$('.buttonNext').hide();
 				}
@@ -133,7 +133,7 @@ function validateSteps(step) {
 			});
 		}
 	}
-	
+
 	return isStepValid;
 }
 
@@ -204,4 +204,37 @@ function validateStep2() {
 function isValidEmailAddress(emailAddress) {
 	var pattern = new RegExp("/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;");
 	return pattern.test(emailAddress);
+}
+
+function populateEventDetails(event) {
+	$('#eventName').text(event.name);
+	$('#eventNameAgain').text(event.name);
+
+	$('#eventAddress').text(event.location);
+	$('#eventAddressAgain').text(event.location);
+
+	$('#eventDescription').text(event.description);
+	$('#eventFlyer').append(
+			'<a href="' + event.flyerUrl + '">' + event.flyerUrl + '</a>');
+	$('#eventMap').attr('src', event.locationURL);
+
+	$('#eventContactEmail').append(
+			'<a href="mailto:' + event.contactEmail + '">' + event.contactEmail
+					+ '</a>');
+	$('#eventContactEmailAgain').append(
+			'<a href="mailto:' + event.contactEmail + '">' + event.contactEmail
+					+ '</a>');
+
+	var dateTime = $.format.date(event.startDateTime, "hh:mm a") + " - "
+			+ $.format.date(event.endDateTime, "hh:mm a") + ",<br />"
+			+ $.format.date(event.endDateTime, "ddd, MMMM dd, yyyy")
+
+	$('#eventPricing').text(
+			"Adults: $" + event.adultCost + " - Kids: $" + event.childCost);
+
+	$('#eventTime').append(dateTime);
+
+	$('#eventTimeAgain').append(dateTime);
+
+	$('#eventImage').val(event.paymentLogo);
 }
