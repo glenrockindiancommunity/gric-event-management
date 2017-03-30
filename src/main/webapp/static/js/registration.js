@@ -45,7 +45,7 @@ $(document).ready(
 				if (step == 4) {
 					$('.buttonNext').hide();
 					$('.buttonPrevious').hide();
-					$('buttonFinish').hide();
+					$('.buttonFinish').hide();
 				}
 			}
 
@@ -133,7 +133,7 @@ function validateSteps(step) {
 			});
 		}
 	}
-
+	
 	return isStepValid;
 }
 
@@ -149,8 +149,8 @@ function validateStep2() {
 	}
 
 	// Validate firstname
-	var ln = $('#firstname').val();
-	if (!ln && ln.length <= 0) {
+	var fn = $('#firstname').val();
+	if (!fn && ln.length <= 0) {
 		isValid = false;
 		$('#msg_firstname').html('Please provide a Firstname').show();
 	} else {
@@ -159,16 +159,11 @@ function validateStep2() {
 
 	// validate email
 	var email = $('#primaryEmail').val();
-	if (email && email.length > 0) {
-		if (!isValidEmailAddress(email)) {
-			isValid = false;
-			$('#msg_primaryEmail').html('Email is invalid').show();
-		} else {
-			$('#msg_primaryEmail').html('').hide();
-		}
-	} else {
+	if (!email && email.length <= 0) {
 		isValid = false;
 		$('#msg_primaryEmail').html('Please enter email').show();
+	} else {
+		$('#msg_primaryEmail').html('').hide();
 	}
 
 	// validate town
@@ -182,7 +177,7 @@ function validateStep2() {
 
 	// validate adults
 	var adults = $('#adults').val();
-	if (!adults && (adults.length <= 0 || (adults + 0) < 1)) {
+	if (!adults || adults.length <= 0 || parseInt(adults) < 1) {
 		isValid = false;
 		$('#msg_adults').html(
 				'Please provide a valid number of adults attending the event')
@@ -193,7 +188,7 @@ function validateStep2() {
 
 	// validate children
 	var children = $('#children').val();
-	if (!children && (children.length <= 0 || (children + 0) < 0)) {
+	if (!children || children.length <= 0 || parseInt(children) < 0) {
 		isValid = false;
 		$('#msg_children')
 				.html(
@@ -207,7 +202,6 @@ function validateStep2() {
 }
 
 function isValidEmailAddress(emailAddress) {
-	var pattern = new RegExp(
-			/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+	var pattern = new RegExp("/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;");
 	return pattern.test(emailAddress);
 }

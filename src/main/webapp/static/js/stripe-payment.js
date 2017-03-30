@@ -1,7 +1,8 @@
 var handler = StripeCheckout.configure({
-	key : "pk_test_nszotlTHR4kvffxr5YH3HUIm",
-	locale : "auto",
-	image: '/static/images/' + $('eventImage').text(),
+	key : 'pk_test_nszotlTHR4kvffxr5YH3HUIm',
+	locale : 'auto',
+	color : 'blue',
+	image : '/static/images/' + $('eventImage').text(),
 	token : function(token) {
 		// You can access the token ID with `token.id`.
 		// Get the token ID to your server-side code for use.

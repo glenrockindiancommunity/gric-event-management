@@ -160,7 +160,7 @@
             <td align="left"><span id="msg_adults"></span>&nbsp;</td>
           </tr>
           <tr>
-            <td align="right">Children (Ages 5 - 11)<span class="required">*</span> :
+            <td align="right">Children (Ages 5 - 17)<span class="required">*</span> :
             </td>
             <td align="left"><input type="text" id="children" name="children" value="0" class="numBox"></td>
             <td align="left"><span id="msg_children"></span>&nbsp;</td>

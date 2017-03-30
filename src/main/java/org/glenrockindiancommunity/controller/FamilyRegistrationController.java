@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.glenrockindiancommunity.integrate.EventRegistration;
 import org.glenrockindiancommunity.model.Family;
+import org.glenrockindiancommunity.model.GricEvent;
+import org.glenrockindiancommunity.respository.EventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class FamilyRegistrationController {
 
   @Autowired
   private EventRegistration doEverything;
+  
+  @Autowired
+  private EventRepository eventRepository;
 
   /**
    * Submit the form to db, all in!
@@ -35,6 +40,8 @@ public class FamilyRegistrationController {
     log.info("Controller calling registerFamily");
 
     Integer eventId = family.getEventId();
+    
+    GricEvent event = eventRepository.findOne(eventId);
 
     try {
       family.setStripeReceiptNumber(tokenId);
@@ -43,7 +50,7 @@ public class FamilyRegistrationController {
       log.error("Error submitting form " + e.getMessage());
       return "There was an error submitting your request " + e.getMessage() + "\n\n";
     }
-    return "<p>See you soon at the " + eventId + ". </p> <p>Your card has been charged <b>$" + family.getAmount()
+    return "<p>See you soon at the " + event.getName() + ". </p> <p>Your card has been charged <b>$" + family.getAmount()
         + "</b> for the event </p> <p>Your event confirmation id is  <b>" + family.getFamilyNameCode()
         + "</b> and your payment confirmation id is <b>" + family.getStripeReceiptNumber() + "</b>. </p>";
   }
@@ -61,6 +68,12 @@ public class FamilyRegistrationController {
   public BigDecimal calculateTotal(@PathVariable Integer eventId, @PathVariable int adultCount,
       @PathVariable int childCount) {
     log.info("Calculating cost...");
+    
+    // Just don't calculate values
+    if (adultCount < 1 || childCount < 0) {
+      return new BigDecimal("0.0");
+    }
+    
     return doEverything.calculateTotalCharge(eventId, adultCount, childCount);
   }
 
