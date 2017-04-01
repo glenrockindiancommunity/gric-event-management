@@ -177,7 +177,7 @@ function validateStep2() {
 
 	// validate adults
 	var adults = $('#adults').val();
-	if (!adults || adults.length <= 0 || parseInt(adults) < 1) {
+	if (!adults || !isInt(adults) || parseInt(adults) > 0) {
 		isValid = false;
 		$('#msg_adults').html(
 				'Please provide a valid number of adults attending the event')
@@ -194,11 +194,22 @@ function validateStep2() {
 				.html(
 						'Please provide a valid number of children attending the event')
 				.show();
-	} else {
+	} else if (parseInt(adults) == 0) {
+		$('#msg_children')
+		.html(
+				'Children cannot attend without adults. Please provide a valid number of adults')
+		.show();
+	}
+	else {
 		$('#msg_children').html('').hide();
 	}
 
 	return isValid;
+}
+
+function isInt(value) {
+	return !isNaN(value) && parseInt(Number(value)) == value
+			&& !isNaN(parseInt(value, 10));
 }
 
 function isValidEmailAddress(emailAddress) {
