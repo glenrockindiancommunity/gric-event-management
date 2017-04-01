@@ -177,7 +177,7 @@ function validateStep2() {
 
 	// validate adults
 	var adults = $('#adults').val();
-	if (!adults || !isInt(adults) || !parseInt(adults) > 0) {
+	if (!adults || !isInt(adults) || parseInt(adults) < 0) {
 		isValid = false;
 		$('#msg_adults').html(
 				'Please provide a valid number of adults attending the event')
@@ -197,11 +197,10 @@ function validateStep2() {
 	} else if (parseInt(adults) == 0) {
 		isValid = false;
 		$('#msg_children')
-		.html(
-				'Children cannot attend without adults. Please provide a valid number of adults')
-		.show();
-	}
-	else {
+				.html(
+						'Children cannot attend without adults. Please provide a valid number of adults')
+				.show();
+	} else {
 		$('#msg_children').html('').hide();
 	}
 
