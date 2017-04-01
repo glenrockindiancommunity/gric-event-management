@@ -177,7 +177,7 @@ function validateStep2() {
 
 	// validate adults
 	var adults = $('#adults').val();
-	if (!adults || !isInt(adults) || parseInt(adults) < 0) {
+	if (!adults || adults.length <= 0 || !isInt(adults) || parseInt(adults) < 1) {
 		isValid = false;
 		$('#msg_adults').html(
 				'Please provide a valid number of adults attending the event')
@@ -188,17 +188,11 @@ function validateStep2() {
 
 	// validate children
 	var children = $('#children').val();
-	if (!children || children.length <= 0 || parseInt(children) < 0) {
+	if (!children || children.length <= 0 || parseInt(children) < 0 || !isInt(children)) {
 		isValid = false;
 		$('#msg_children')
 				.html(
 						'Please provide a valid number of children attending the event')
-				.show();
-	} else if (parseInt(adults) == 0) {
-		isValid = false;
-		$('#msg_children')
-				.html(
-						'Children cannot attend without adults. Please provide a valid number of adults')
 				.show();
 	} else {
 		$('#msg_children').html('').hide();
@@ -206,7 +200,7 @@ function validateStep2() {
 
 	return isValid;
 }
-
+// text and decimal validation
 function isInt(value) {
 	return !isNaN(value) && parseInt(Number(value)) == value
 			&& !isNaN(parseInt(value, 10));
