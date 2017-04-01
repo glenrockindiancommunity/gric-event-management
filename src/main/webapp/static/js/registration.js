@@ -195,6 +195,7 @@ function validateStep2() {
 						'Please provide a valid number of children attending the event')
 				.show();
 	} else if (parseInt(adults) == 0) {
+		isValid = false;
 		$('#msg_children')
 		.html(
 				'Children cannot attend without adults. Please provide a valid number of adults')
