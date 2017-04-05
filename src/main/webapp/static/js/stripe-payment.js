@@ -1,6 +1,7 @@
 function registerStripeJs(event) {
 	var handler = StripeCheckout.configure({
-		key : 'pk_live_xWIqW6LJ6v4NktU0Tns237I0',
+		// key : 'pk_live_xWIqW6LJ6v4NktU0Tns237I0',
+		key : 'pk_test_nszotlTHR4kvffxr5YH3HUIm',
 		locale : 'auto',
 		color : 'blue',
 		image : '/static/images/' + event.paymentLogo,

@@ -26,6 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .hasRole("USER")
        .antMatchers("/family/**")
          .hasRole("USER")
+       .antMatchers("/family.jsp/**")
+         .hasRole("USER")
        .and()
         .antMatcher("/**").authorizeRequests()
         .anyRequest().permitAll();

@@ -19,7 +19,7 @@ body {
 	padding: 0;
 	border: 0px solid #CCC;
 	overflow: visible;
-	width: 980px;
+	width: 100%;
 }
 
 .payNow {
@@ -63,17 +63,23 @@ body {
 	z-index: 88;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	width: 968px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 100%;
 	clear: both;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .swMain div.actionBar {
 	display: block;
 	position: relative;
 	clear: both;
-	margin: 3px 0;
+	margin: 3px 0 10px 0;
 	border: 1px solid #CCC;
-	padding: 3px 0;
+	padding: 0;
 	color: #5A5655;
 	background-color: #F8F8F8;
 	height: 40px;
@@ -82,6 +88,7 @@ body {
 	z-index: 88;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	border-radius: 5px;
 	left: 0;
 }
 
@@ -99,6 +106,7 @@ body {
 	z-index: 88;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .swMain ul.anchor {
@@ -111,6 +119,10 @@ body {
 	clear: both;
 	border: 0px solid #CCCCCC;
 	background: transparent; /*#EEEEEE */
+}
+
+.swMain ul.anchor li:last-child {
+	padding-right: 0;
 }
 
 .swMain ul.anchor li {
@@ -131,11 +143,12 @@ body {
 	margin: 0;
 	padding: 3px;
 	height: 60px;
-	width: 230px;
+	width: 100%;
 	text-decoration: none;
 	outline-style: none;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	border-radius: 5px;
 	z-index: 99;
 }
 
@@ -373,54 +386,46 @@ th {
  * jQuery Basic Table
  * Author: Jerry Low
  */
-
-table.bt thead,
-table.bt tbody th {
-  display: none;
+table.bt thead, table.bt tbody th {
+	display: none;
 }
 
-table.bt tfoot th,
-table.bt tfoot td,
-table.bt tbody td {
-  border: none;
-  display: block;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  vertical-align: top;
-
-  /* IE 9 */
-  float: left\9;
-  width: 100%\9;
+table.bt tfoot th, table.bt tfoot td, table.bt tbody td {
+	border: none;
+	display: block;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	vertical-align: top;
+	/* IE 9 */
+	float: left\9;
+	width: 100% \9;
 }
 
-table.bt tfoot th::before,
-table.bt tfoot td::before,
-table.bt tbody td::before {
-  content: attr(data-th) ": ";
-  display: inline-block;
-  -webkit-flex-shrink: 0;
-  -ms-flex-shrink: 0;
-  flex-shrink: 0;
-  font-weight: bold;
-  width: 6.5em;
+table.bt tfoot th::before, table.bt tfoot td::before, table.bt tbody td::before
+	{
+	content: attr(data-th) ": ";
+	display: inline-block;
+	-webkit-flex-shrink: 0;
+	-ms-flex-shrink: 0;
+	flex-shrink: 0;
+	font-weight: bold;
+	width: 6.5em;
 }
 
-table.bt tfoot th.bt-hide,
-table.bt tfoot td.bt-hide,
-table.bt tbody td.bt-hide {
-  display: none;
+table.bt tfoot th.bt-hide, table.bt tfoot td.bt-hide, table.bt tbody td.bt-hide
+	{
+	display: none;
 }
 
-table.bt tfoot th .bt-content,
-table.bt tfoot td .bt-content,
-table.bt tbody td .bt-content {
-  vertical-align: top;
+table.bt tfoot th .bt-content, table.bt tfoot td .bt-content, table.bt tbody td .bt-content
+	{
+	vertical-align: top;
 }
 
 .bt-wrapper.active {
-  max-height: 310px;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+	max-height: 310px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }

@@ -1,14 +1,21 @@
 <html>
 <head>
 <title>Glen Rock Indian Community - Registration</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- Include CSS -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
 <link href="static/css/smart_wizard.css" rel="stylesheet" type="text/css">
+<link href="static/css/gric.css" rel="stylesheet" type="text/css">
 
 <!-- Include JS -->
 <script src="https://checkout.stripe.com/checkout.js"></script>
+<link href="http://addtocalendar.com/atc/1.5/atc-style-blue.css" rel="stylesheet" type="text/css">
 
+
+<script type="text/javascript" src="https://addtocalendar.com/atc/1.5/atc.min.js"></script>
 <script type="text/javascript" src="static/js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="static/js/jquery-dateFormat.min.js"></script>
 <script type="text/javascript" src="static/js/jquery.smartWizard.js"></script>
@@ -21,12 +28,22 @@
 		    var url = "/event/" + <%=request.getParameter("id")%>;
 		    $.get(url, function(data, status) {
 		    	registerStripeJs(data);
-		    	populateEventDetails(data)		    	
+		    	populateEventDetails(data);
+		    	populateEventCal(data);
 		});
 	}
 </script>
 </head>
 <body>
+<script type="text/javascript">(function () {
+        if (window.addtocalendar)if(typeof window.addtocalendar.start == "function")return;
+        if (window.ifaddtocalendar == undefined) { window.ifaddtocalendar = 1;
+            var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+            s.type = 'text/javascript';s.charset = 'UTF-8';s.async = true;
+            s.src = ('https:' == window.location.protocol ? 'https' : 'http')+'://addtocalendar.com/atc/1.5/atc.min.js';
+            var h = d[g]('body')[0];h.appendChild(s); }})();
+</script>
+
   <h1>
     Glen Rock Indian Community <span id="eventName"></span> Registration
   </h1>
@@ -85,7 +102,25 @@
               </p>
               <h2 align="center" id="eventAddress">&nbsp;
               </h2>
+              <p>
+             <!-- 3. Place event data -->
+                <span class="addtocalendar atc-style-blue">
+                    <var class="atc_event">
+                        <var class="atc_date_start" id="eventStartDateCal">&nbsp;</var>
+                        <var class="atc_date_end" id="eventEndDateCal">&nbsp;</var>
+                        <var class="atc_timezone">America/New_York</var>
+                        <var class="atc_title" id="eventNameCal">&nbsp;</var>
+                        <var class="atc_description" id="eventDescCal">&nbsp;</var>
+                        <var class="atc_location" id="eventLocationCal">&nbsp;</var>
+                        <var class="atc_organizer">Glen Rock Indian Community</var>
+                        <var class="atc_organizer_email" id="eventEmailCal">&nbsp;</var>
+                    </var>
+                </span>              
+              </p>
+              
               <h3 align="center" id="eventContactEmail">&nbsp;</h3>
+              
+              
             </td>
           </tr>
         </table>
@@ -206,6 +241,7 @@
               <p>&nbsp;</p>
               <h2 align="center" id="eventAddressAgain">&nbsp;</h2>
               <h2 align="center" id="eventTimeAgain">&nbsp;</h2>
+              
             </td>
           </tr>
         </table>

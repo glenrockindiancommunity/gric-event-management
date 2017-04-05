@@ -3,7 +3,7 @@ $(document).ready(
 			// Smart Wizard
 			$('#wizard').smartWizard({
 				// contentURL : '/event' + $('#eventId').val(),
-				transitionEffect : 'slideLeft',
+				transitionEffect : 'slide',
 				enableAllSteps : false,
 				keyNavigation : false, // Enable/Disable key
 				// navigation(left and right keys are used if enabled)
@@ -243,3 +243,17 @@ function populateEventDetails(event) {
 
 	$('#eventImage').val(event.paymentLogo);
 }
+
+function populateEventCal(event) {
+	$('#eventNameCal').text(event.name);
+	$('#eventLocationCal').text(event.location);
+	$('#eventDescCal').text(event.description);
+	$('#eventEmailCal').text(event.contactEmail);
+	
+	var stDate = $.format.date(event.startDateTime, "yyyy-MM-dd hh:mm:ss");
+	var edDate = $.format.date(event.endDateTime, "yyyy-MM-dd hh:mm:ss");
+	
+	$('#eventStartDateCal').text(stDate);
+	$('#eventEndDateCal').text(edDate);
+}
+
