@@ -249,6 +249,9 @@
     </div>
     <!-- End SmartWizard Content -->
   </form>
+  
+    <a href="https://stripe.com/docs/security/stripe"><img alt="Powered By Stripe" src="static/images/powered_by_stripe@2x.png"/></a>
+  
   <h6>
     Developed by: <a href="http://protonfever.blogspot.com/">Varun Mehta</a>
   </h6>
