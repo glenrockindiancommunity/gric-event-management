@@ -241,7 +241,6 @@
               <p>&nbsp;</p>
               <h2 align="center" id="eventAddressAgain">&nbsp;</h2>
               <h2 align="center" id="eventTimeAgain">&nbsp;</h2>
-              
             </td>
           </tr>
         </table>
