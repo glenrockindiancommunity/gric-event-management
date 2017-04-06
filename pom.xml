@@ -5,7 +5,7 @@
 	<artifactId>gric-event</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GRIC Indian Community Event Registation</name>
+	<name>GRIC Indian Community Event Registration</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
