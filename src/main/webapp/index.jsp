@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Glen Rock Indian Community - Events</title>
-<meta http-equiv="refresh" content="0; url=https://www.facebook.com/media/set/?set=a.1311432465576620.1073741857.118298044890074&type=1&l=516d5380ae">
+<meta http-equiv="refresh" content="0; url=https://www.facebook.com/hashtag/grholi">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <!-- Include CSS -->
