@@ -23,7 +23,7 @@ public class HomeController {
    */
   @RequestMapping(path = "/")
   public String redirectToIndex(Model model) {
-    return "redirect:/index.jsp";
+    return "redirect:/index.html";
   }
 
   @GetMapping("/upcoming")

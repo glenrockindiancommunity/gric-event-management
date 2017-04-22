@@ -1,172 +1,162 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Glen Rock Indian Community</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript" src="js/jquery-dateFormat.min.js"></script>
+<title></title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="css/base.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="js/jquery-dateFormat.min.js"></script>
+<script type="text/javascript" src="js/stripe-payment.js"></script>
+<script type="text/javascript" src="js/event-list.js"></script>
+<script type="text/javascript" src="js/event-details.js"></script>
 </head>
-
 <body>
-    <div data-role="page" id="events">
+  <div data-role="page" id="events">
 
-        <div data-role="header">
-            <h1>GRIC - Events</h1>
-        </div>
-
-        <!-- /header -->
-
-        <div role="main" class="ui-content">
-            <ul data-role="listview" data-inset="true">
-                <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">Days to Event</span></li>
-                <li>
-                    <a href="#event">
-                        <h2>Event Name</h2>
-                        <p>Event Description</p>
-                        <p class="ui-li-aside"><strong>Event Time(h:mm A)</strong></p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#event">
-                        <h2>jQuery Team</h2>
-                        <p><strong>Boston Conference Planning</strong></p>
-                        <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
-                        <p class="ui-li-aside"><strong>9:18</strong>AM</p>
-                    </a>
-                </li>
-                <li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
-                <li>
-                    <a href="#event">
-                        <h2>Avery Walker</h2>
-                        <p><strong>Re: Dinner Tonight</strong></p>
-                        <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
-                        <p class="ui-li-aside"><strong>4:48</strong>PM</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" data-position="fixed">
-            <h5><a href="https://stripe.com/docs/security/stripe"><img alt="Powered By Stripe" src="images/powered_by_stripe.png"/></a></h5>
-            <h5>Developed by: <a href="http://protonfever.blogspot.com/">Varun Mehta</a></h5>
-        </div>
-        <!-- /footer -->
+    <div data-role="header" class="gric-header">
+      <h1>GRIC - Events</h1>
     </div>
-    <!-- /page -->
 
-    <!-- Start of second page -->
-    <div data-role="page" id="event">
-
-        <div data-role="header">
-            <h1 id="eventName">Event Name</h1>
-            <a href="#nav-panel" class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-iconpos="notext" data-role="button" role="button">Menu</a>
-            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
-        </div>
-        <!-- /header -->
-
-        <div role="main" class="ui-content">
-            <p>Event details</p>
-
-            <a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Map</a>
-            <div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
-                <a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1506.2442243039332!2d-74.12964083386848!3d40.970784040398534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fcab80b38c0b%3A0x933ea1f3338e8f4b!2sFaber+Fields!5e0!3m2!1sen!2sus!4v1490796727751"
-                    width="400" height="320" seamless=""></iframe>
-            </div>
-
-            <form method="post" action="#" id="">
-                <div class="ui-field-contain">
-                    <label for="town" class="select">Town</label>
-                    <select name="town" id="town">
-                  <option value="GR">Glen Rock</option>
-                  <option value="RW">Ridgewood</option>
-                  <option value="FL">Fair Lawn</option>
-                  <option value="OH">Other</option>
-              </select>
-                </div>
-                <div class="ui-field-contain">
-                    <label for="lastname">Last Name:</label>
-                    <input type="text" name="lastname" id="lastname1" placeholder="Last Name" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label for="firstname">First Name:</label>
-                    <input type="text" name="firstname" id="firstname" placeholder="First Name" value="">
-                </div>
-
-                <div class="ui-field-contain">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Email" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label for="adults">Adults:</label>
-                    <input type="number" name="adults" id="adults" placeholder="Adults" value="">
-                </div>
-                <div class="ui-field-contain">
-                    <label for="children">Children:</label>
-                    <input type="number" name="children" id="children" placeholder="Children" value="">
-                </div>
-                <label for="participate">Participate for Run:</label>
-                <input type="checkbox" data-role="flipswitch" name="participate" id="participate" data-on-text="Yes" data-off-text="No" data-wrapper-class="custom-label-flipswitch">
-
-                <label for="volunteer">Volunteer to help:</label>
-                <input type="checkbox" data-role="flipswitch" name="volunteer" id="volunteer" data-on-text="Yes" data-off-text="No" data-wrapper-class="custom-label-flipswitch">
-
-                <div class="ui-input-btn ui-btn ui-corner-all ui-shadow">
-                    Register
-                    <input type="button" data-enhanced="true" value="Register">
-                </div>
-            </form>
-        </div>
-        <!-- /content -->
-
-        <!-- Start of first page -->
-
-        <div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="a" class="jqm-navmenu-panel ui-panel ui-panel-position-left ui-panel-display-overlay ui-panel-closed ui-body-a ui-panel-animate">
-            <h2>Events</h2>
-            <ul data-role="listview" data-inset="true">
-                <li><a href="#events">Event Name</a></li>
-                <li><a href="#events">Event Name</a></li>
-            </ul>
-        </div>
-        <!-- /leftpanel1 -->
-
-        <div data-role="panel" data-position="right" data-display="overlay" data-theme="a" id="add-form">
-          <h2>Glen Rock Indian Community</h2>
-          <p>GRIC consists of people living in Glen Rock whose ancestory belongs to India. This group organizes events around town to spread more awareness about India and it's people, and maintain its culture alive for the future generations.</p>
-        </div>
-        <!-- /panel -->
-
-
-        <div data-role="footer">
-            <h4>Page Footer</h4>
-        </div>
-        <!-- /footer -->
+    <!-- /header -->
+    <div role="main" class="ui-content">
+      <ul data-role="listview" data-inset="true" id="eventList">
+      </ul>
     </div>
-    <!-- /page -->
+    <!-- /content -->
 
-    <!-- Start of third page -->
-    <div data-role="page" id="complete">
-
-        <div data-role="header">
-            <h1>Success!</h1>
-        </div>
-        <!-- /header -->
-
-        <div role="main" class="ui-content">
-            <p>Registration successful!</p>
-        </div>
-        <!-- /content -->
-
-        <div data-role="footer" data-position="fixed">
-            <h4>Page Footer</h4>
-        </div>
-        <!-- /footer -->
+    <div data-role="footer" data-position="fixed">
+      <h5>
+        <a href="https://stripe.com/docs/security/stripe"><img alt="Powered By Stripe" src="images/powered_by_stripe.png" /></a>
+      </h5>
+      <h5>
+        Developed by: <a href="http://protonfever.blogspot.com/">Varun Mehta</a>
+      </h5>
     </div>
-    <!-- /page -->
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of second page -->
+  <div data-role="page" id="event">
+
+    <div data-role="header" class="gric-header">
+      <h1 id="eventName">Event Name</h1>
+      <a href="#nav-panel"
+        class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all"
+        data-iconpos="notext" data-role="button" role="button">Menu</a> <a href="#add-form" data-icon="gear"
+        data-iconpos="notext">Add</a>
+    </div>
+    <!-- /header -->
+
+    <div role="main" class="ui-content">
+      <p id="eventDescription">&nbsp;</p>
+      <p id="eventDateTime">&nbsp;</p>
+      <p id="eventAddress">&nbsp;</p>
+      <p id="eventEmail">&nbsp;</p>
+      <p id="eventPricing">&nbsp;</p>
+
+      <form method="post" action="#complete" id="">
+        <div class="ui-field-contain">
+          <label for="town" class="select">Town</label> <select name="town" id="town">
+            <option value="GR">Glen Rock</option>
+            <option value="RW">Ridgewood</option>
+            <option value="FL">Fair Lawn</option>
+            <option value="OH">Other</option>
+          </select>
+        </div>
+        <div class="ui-field-contain">
+          <label for="lastname">Last Name:</label> <input type="text" name="lastname" id="lastname1" placeholder="Last Name"
+            value="">
+        </div>
+        <div class="ui-field-contain">
+          <label for="firstname">First Name:</label> <input type="text" name="firstname" id="firstname"
+            placeholder="First Name" value="">
+        </div>
+
+        <div class="ui-field-contain">
+          <label for="email">Email:</label> <input type="email" name="email" id="email" placeholder="Email" value="">
+        </div>
+        <div class="ui-field-contain">
+          <label for="adults">Adults:</label> <input type="number" name="adults" id="adults" placeholder="Adults" value="">
+        </div>
+        <div class="ui-field-contain">
+          <label for="children">Children:</label> <input type="number" name="children" id="children" placeholder="Children"
+            value="">
+        </div>
+        <div class="ui-field-contain">
+          <label for="participate">Participate for Run:</label> <input type="checkbox" data-role="flipswitch"
+            name="participate" id="participate" data-on-text="Yes" data-off-text="No"
+            data-wrapper-class="custom-label-flipswitch">     
+        </div>
+        <div class="ui-field-contain">
+          <label for="volunteer">Volunteer to help:</label> <input type="checkbox" data-role="flipswitch" name="volunteer"
+            id="volunteer" data-on-text="Yes" data-off-text="No" data-wrapper-class="custom-label-flipswitch">
+        </div>
+
+        <div class="ui-input-btn ui-btn ui-corner-all ui-shadow">
+          Register <input type="button" data-enhanced="true" value="Register">
+        </div>
+      </form>
+    </div>
+    <!-- /content -->
+
+    <!-- Start of first page -->
+
+    <div data-role="panel" id="nav-panel" data-position="left" data-display="overlay" data-theme="a"
+      class="jqm-navmenu-panel ui-panel ui-panel-position-left ui-panel-display-overlay ui-panel-closed ui-body-a ui-panel-animate">
+      <h2>Events</h2>
+      <ul data-role="listview" data-inset="true">
+        <li><a href="#events">Event Name</a></li>
+        <li><a href="#events">Event Name</a></li>
+      </ul>
+    </div>
+    <!-- /leftpanel1 -->
+
+    <div data-role="panel" data-position="right" data-display="overlay" data-theme="a" id="add-form">
+      <h2>Glen Rock Indian Community</h2>
+      <p>GRIC consists of people living in Glen Rock whose ancestory belongs to India. This group organizes events around
+        town to spread more awareness about India and it's people, and maintain its culture alive for the future generations.</p>
+    </div>
+    <!-- /panel -->
+
+
+    <div data-role="footer">
+      <h4>Page Footer</h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
+
+  <!-- Start of third page -->
+  <div data-role="page" id="complete">
+
+    <div data-role="header">
+      <h1>Success!</h1>
+    </div>
+    <!-- /header -->
+
+    <div role="main" class="ui-content">
+      <p>Registration successful!</p>
+      <a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Get
+        Directions</a>
+      <div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
+        <a href="#" data-rel="back"
+          class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1506.2442243039332!2d-74.12964083386848!3d40.970784040398534!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fcab80b38c0b%3A0x933ea1f3338e8f4b!2sFaber+Fields!5e0!3m2!1sen!2sus!4v1490796727751"
+          width="400" height="320" seamless></iframe>
+      </div>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+      <h4>Page Footer</h4>
+    </div>
+    <!-- /footer -->
+  </div>
+  <!-- /page -->
 </body>
 
 </html>

@@ -4,7 +4,7 @@ function registerStripeJs(event) {
      // key : 'pk_test_nszotlTHR4kvffxr5YH3HUIm',
 		locale : 'auto',
 		color : 'blue',
-		image : '/static/images/' + event.paymentLogo,
+		image : 'images/' + event.paymentLogo,
 		token : function(token) {
 			// You can access the token ID with `token.id`.
 			// Get the token ID to your server-side code for use.
